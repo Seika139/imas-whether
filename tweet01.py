@@ -11,11 +11,11 @@ token_secret = os.environ["ACCESS_TOKEN_SECRET"])
 t = twitter.Twitter(auth=auth)
 
 #ツイートのみ
-status="外人ぽい人が自販機の前で「この中のどのコーヒーが甘いですか」と聞かれたが、そんなこと聞かれても..." #投稿するツイート
+status="外人ぽい人が自販機の前で「この中のどのコーヒーが甘いですか?」と聞かれたが、そんなこと聞かれても..." #投稿するツイート
 t.statuses.update(status=status) #Twitterに投稿
 
 #画像付きツイート
-pic=""　#画像を投稿するなら画像のパス
+pic="udsuki2.jpg"　#画像を投稿するなら画像のパス
 with open(pic,"rb") as image_file:
  image_data=image_file.read()
 pic_upload = twitter.Twitter(domain='upload.twitter.com',auth=auth)
