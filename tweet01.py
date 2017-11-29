@@ -1,16 +1,12 @@
 # coding:utf-8
 import twitter
-
-ACCESS_TOKEN = ""
-ACCESS_TOKEN_SECRET = ""
-CONSUMER_KEY = ""
-CONSUMER_SECRET = ""
+import os
 
 
-auth = twitter.OAuth(consumer_key="863556291729301504-MaPF7pwhLQtFwUrtMIzxS0gQd7wEEOC",
-consumer_secret="fCp80ufrYK6rMVI9lqC0SOiXE6kRlTj4T7lhw6aZdKDw1",
-token="fSMitUng7w3UkXU4kCMYrXmC6",
-token_secret="SSsyuo4tE6RW8yQLAZJLLa9795NYcd4mppLnkEDHOcv6iuSIqU")
+auth = twitter.OAuth(consumer_key = os.environ["CONSUMER_KEY"],
+consumer_secret = os.environ["CONSUMER_SECRET"],
+token = os.environ["ACCESS_TOKEN_KEY"],
+token_secret = os.environ["ACCESS_TOKEN_SECRET"])
 
 t = twitter.Twitter(auth=auth)
 
