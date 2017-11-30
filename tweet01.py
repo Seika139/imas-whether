@@ -1,14 +1,16 @@
 # coding:utf-8
-import twitter
+import pywapi
+from numpy.random import *
+from twitter import *
 import os
 
 
-auth = twitter.OAuth(consumer_key = os.environ["CONSUMER_KEY"],
+consumer_key = os.environ["CONSUMER_KEY"],
 consumer_secret = os.environ["CONSUMER_SECRET"],
 token = os.environ["ACCESS_TOKEN_KEY"],
-token_secret = os.environ["ACCESS_TOKEN_SECRET"])
+token_secret = os.environ["ACCESS_TOKEN_SECRET"]
 
-t = twitter.Twitter(auth=auth)
+t = Twitter(auth = OAuth(token,token_secret,consumer_key,consumer_secret))
 
 #ツイートのみ
 status="外人ぽい人が自販機の前で「この中のどのコーヒーが甘いですか?」と聞かれたが、そんなこと聞かれても..." #投稿するツイート
