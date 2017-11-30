@@ -6,7 +6,7 @@ import os
 
 consumer_key = os.environ["CONSUMER_KEY"],
 consumer_secret = os.environ["CONSUMER_SECRET"],
-token = os.environ["ACCESS_TOKEN_KEY"],
+token = os.environ["ACCESS_TOKEN"],
 token_secret = os.environ["ACCESS_TOKEN_SECRET"]
 
 t = Twitter(auth = OAuth(token,token_secret,consumer_key,consumer_secret))
@@ -22,3 +22,9 @@ with open(pic,"rb") as image_file:
 pic_upload = twitter.Twitter(domain='upload.twitter.com',auth=auth)
 id_img1 = pic_upload.media.upload(media=image_data)["media_id_string"]
 t.statuses.update(status=status,media_ids=",".join([id_img1]))
+
+
+"""
+環境変数を参照する時
+heroku config --app gentle-crag-58603
+"""
