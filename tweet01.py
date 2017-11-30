@@ -1,6 +1,4 @@
-#!/usr/bin/env python
 # coding:utf-8
-import pywapi
 from numpy.random import *
 from twitter import *
 import os
