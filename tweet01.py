@@ -21,7 +21,7 @@ with open(pic,"rb") as image_file:
     image_data=image_file.read()
 pic_upload = twitter.Twitter(domain='upload.twitter.com',auth=auth)
 id_img1 = pic_upload.media.upload(media=image_data)["media_id_string"]
-t.statuses.update(status=status,media_ids=",".join([id_img1]))
+t.statuses.update(status=status,media_ids=",".join([id=img1]))
 
 
 """
