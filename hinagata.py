@@ -30,7 +30,7 @@ media_id = json.loads(req_media.text)['media_id']
 print ("Media ID: %d" % media_id)
 
 # Media ID を付加してテキストを投稿
-params = {'status': 'おはようございます！', "media_ids": [media_id]}
+params = {'status': 'お疲れ様です！', "media_ids": [media_id]}
 req_media = twitter.post(url_text, params = params)
 
 # 再びレスポンスを確認

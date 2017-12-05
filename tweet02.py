@@ -4,10 +4,10 @@ import os
 import json
 from requests_oauthlib import OAuth1Session
 
-AT = os.environ["ACCESS_TOKEN"]
-AS = os.environ["ACCESS_TOKEN_SECRET"]
-CK = os.environ["CONSUMER_KEY"]
-CS = os.environ["CONSUMER_SECRET"]
+AT = os.environ["ACCESS_TOKEN"]              # Access Token
+AS = os.environ["ACCESS_TOKEN_SECRET"]       # Accesss Token Secert
+CK = os.environ["CONSUMER_KEY"]              # Consumer Key
+CS = os.environ["CONSUMER_SECRET"]           # Consumer Secret
 
 
 url_media = "https://upload.twitter.com/1.1/media/upload.json"
@@ -17,7 +17,7 @@ url_text = "https://api.twitter.com/1.1/statuses/update.json"
 twitter = OAuth1Session(CK, CS, AT, AS)
 
 # 画像投稿
-files = {"media" : open('chieri.jpg', 'rb')}
+files = {"media" : open('udsuki2.jpg', 'rb')}
 req_media = twitter.post(url_media, files = files)
 
 # レスポンスを確認
