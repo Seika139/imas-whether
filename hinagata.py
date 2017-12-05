@@ -4,10 +4,10 @@
 import json
 from requests_oauthlib import OAuth1Session
 
-AT = os.environ["ACCESS_TOKEN"]
-AS = os.environ["ACCESS_TOKEN_SECRET"]
-CK = os.environ["CONSUMER_KEY"]
-CS = os.environ["CONSUMER_SECRET"]
+AT = "863556291729301504-MaPF7pwhLQtFwUrtMIzxS0gQd7wEEOC"
+AS = "fCp80ufrYK6rMVI9lqC0SOiXE6kRlTj4T7lhw6aZdKDw1"
+CK = "fSMitUng7w3UkXU4kCMYrXmC6"
+CS = "SSsyuo4tE6RW8yQLAZJLLa9795NYcd4mppLnkEDHOcv6iuSIqU"
 
 
 url_media = "https://upload.twitter.com/1.1/media/upload.json"
