@@ -1,5 +1,7 @@
 bottle==0.12.13
+jsonschema==2.5.1
 numpy==1.11.3
 numpydoc==0.6.0
 python-twitter==3.3
+pywapi==0.3.8
 twitter==1.18.0
