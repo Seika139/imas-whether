@@ -17,7 +17,7 @@ API_KEY = "ee84768ccca3c5ad082603b6a0567bfd"
 BASE_URL = "http://api.openweathermap.org/data/2.5/forecast"
 BASE_URL2 = "http://api.openweathermap.org/data/2.5/weather"
 
-url4 = BASE_URL + "?q=Toyko,jp&units=metric&APPID={}".format(API_KEY)
+url4 = BASE_URL + "?q=Tokyo,jp&units=metric&APPID={}".format(API_KEY)
 r4 = requests.get(url4)
 w_d =r4.json()
 
