@@ -9,7 +9,7 @@ r4 = requests.get(url4)
 w_d =r4.json()
 
 
-time = w_d["list"][4]["dt_txt"]
-tenki = w_d["list"][4]["weather"]["description"]
-t_max = w_d["list"][4]["main"]["temp_max"]
-t_min = w_d["list"][4]["main"]["temp_min"]
+time = self.w_d["list"][4]["dt_txt"]
+tenki = self.w_d["list"][4]["weather"]["description"]
+t_max = self.w_d["list"][4]["main"]["temp_max"]
+t_min = self.w_d["list"][4]["main"]["temp_min"]
