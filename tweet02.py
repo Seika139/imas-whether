@@ -3,14 +3,33 @@
 import os
 import json
 from requests_oauthlib import OAuth1Session
-import getweather as gw
+import requests
 
 AT = os.environ["ACCESS_TOKEN"]           # Access Token
 AS = os.environ["ACCESS_TOKEN_SECRET"]    # Accesss Token Secert
 CK = os.environ["CONSUMER_KEY"]           # Consumer Key
 CS = os.environ["CONSUMER_SECRET"]        # Consumer Secret
 
-tweeting_text = "こんばんは！"+gw.time+"の天気予報です。\n天気は"+gw.tenki+"\n最高気温は"+gw.t_max+"度、最低気温は"+gw.t_min+"です。"
+
+
+
+API_KEY = "ee84768ccca3c5ad082603b6a0567bfd"
+BASE_URL = "http://api.openweathermap.org/data/2.5/forecast"
+BASE_URL2 = "http://api.openweathermap.org/data/2.5/weather"
+
+url4 = BASE_URL + "?q=Toyko,jp&units=metric&APPID={}".format(API_KEY)
+r4 = requests.get(url4)
+w_d =r4.json()
+
+
+time = w_d["list"][4]["dt_txt"]
+tenki = w_d["list"][4]["weather"]["description"]
+t_max = w_d["list"][4]["main"]["temp_max"]
+t_min = w_d["list"][4]["main"]["temp_min"]
+
+
+
+tweeting_text = "こんばんは！"+time+"の天気予報です。\n天気は"+tenki+"\n最高気温は"+t_max+"度、最低気温は"+t_min+"です。"
 
 
 url_media = "https://upload.twitter.com/1.1/media/upload.json"
