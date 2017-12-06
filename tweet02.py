@@ -22,10 +22,10 @@ r4 = requests.get(url4)
 w_d =r4.json()
 
 
-time = w_d["list"][4]["dt_txt"]
-tenki = str(w_d["list"][4]["weather"]["description"])
-t_max = str(w_d["list"][4]["main"]["temp_max"])
-t_min = str(w_d["list"][4]["main"]["temp_min"])
+time = r4["list"][4]["dt_txt"]
+tenki = str(r4["list"][4]["weather"]["description"])
+t_max = str(r4["list"][4]["main"]["temp_max"])
+t_min = str(r4["list"][4]["main"]["temp_min"])
 
 
 
