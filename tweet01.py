@@ -32,7 +32,37 @@ gentle-crag-58603　の　tweet01.py を動かす時
 heroku run python tweet01.py --app gentle-crag-58603
 
 requirements.txt に追加するとき
-pip freeze | grep -e "bottle" -e "twitter" -e "APScheduler" -e "numpy" -e "pywapi" -e "json" > requirements.txt
+pip freeze | grep -e "bottle" -e "twitter" -e "APScheduler" -e "numpy" -e "json" -e "requests" > requirements.txt
+
+bottle==0.12.13
+numpy==1.11.3
+numpydoc==0.6.0
+python-twitter==3.3
+twitter==1.18.0
+"""
+
+"""
+-----> PHP app detected
+ !     WARNING: No 'composer.json' found.
+       Using 'index.php' to declare app type as PHP is considered legacy
+       functionality and may lead to unexpected behavior.
+-----> Bootstrapping...
+-----> Installing platform packages...
+       NOTICE: No runtime required in composer.lock; using PHP ^5.5.17
+       - php (5.6.32)
+       - apache (2.4.29)
+       - nginx (1.8.1)
+-----> Installing dependencies...
+       Composer version 1.5.2 2017-09-11 16:59:25
+-----> Preparing runtime environment...
+-----> Checking for additional extensions to install...
+-----> Python app detected
+-----> Installing requirements with pip
+-----> Discovering process types
+       Procfile declares types -> web
+-----> Compressing...
+       Done: 76.3M
+-----> Launching...
 
 
 """

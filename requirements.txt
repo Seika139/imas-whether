@@ -3,4 +3,6 @@ jsonschema==2.5.1
 numpy==1.11.3
 numpydoc==0.6.0
 python-twitter==3.3
+requests==2.12.4
+requests-oauthlib==0.8.0
 twitter==1.18.0

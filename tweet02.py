@@ -3,11 +3,14 @@
 import os
 import json
 from requests_oauthlib import OAuth1Session
+import getweather as gw
 
-AT = os.environ["ACCESS_TOKEN"]              # Access Token
-AS = os.environ["ACCESS_TOKEN_SECRET"]       # Accesss Token Secert
-CK = os.environ["CONSUMER_KEY"]              # Consumer Key
-CS = os.environ["CONSUMER_SECRET"]           # Consumer Secret
+AT = os.environ["ACCESS_TOKEN"]           # Access Token
+AS = os.environ["ACCESS_TOKEN_SECRET"]    # Accesss Token Secert
+CK = os.environ["CONSUMER_KEY"]           # Consumer Key
+CS = os.environ["CONSUMER_SECRET"]        # Consumer Secret
+
+tweeting_text = "こんばんは！"+gw.time+"の天気予報です。\n天気は"+gw.tenki+"\n最高気温は"+gw.t_max+"度、最低気温は"+gw.t_min+"です。"
 
 
 url_media = "https://upload.twitter.com/1.1/media/upload.json"
@@ -30,7 +33,7 @@ media_id = json.loads(req_media.text)['media_id']
 print ("Media ID: %d" % media_id)
 
 # Media ID を付加してテキストを投稿
-params = {'status': 'おはようございます！¥n#デレステスクショお昼の1枚', "media_ids": [media_id]}
+params = {'status': tweeting_text , "media_ids": [media_id]}
 req_media = twitter.post(url_text, params = params)
 
 # 再びレスポンスを確認
