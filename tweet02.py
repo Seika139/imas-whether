@@ -23,9 +23,9 @@ w_d =r4.json()
 
 
 time = w_d["list"][4]["dt_txt"]
-tenki = w_d["list"][4]["weather"]["description"]
-t_max = w_d["list"][4]["main"]["temp_max"]
-t_min = w_d["list"][4]["main"]["temp_min"]
+tenki = str(w_d["list"][4]["weather"]["description"])
+t_max = str(w_d["list"][4]["main"]["temp_max"])
+t_min = str(w_d["list"][4]["main"]["temp_min"])
 
 
 
