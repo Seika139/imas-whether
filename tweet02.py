@@ -4,16 +4,18 @@ import os
 import json
 from requests_oauthlib import OAuth1Session
 import requests
+import urllib.request
 
+#Herokuの環境変数
 AT = os.environ["ACCESS_TOKEN"]           # Access Token
 AS = os.environ["ACCESS_TOKEN_SECRET"]    # Accesss Token Secert
 CK = os.environ["CONSUMER_KEY"]           # Consumer Key
 CS = os.environ["CONSUMER_SECRET"]        # Consumer Secret
 
+#Openweathermapの環境変数
+API_KEY = os.environ["API_KEY"]
 
 
-
-API_KEY = "ee84768ccca3c5ad082603b6a0567bfd"
 BASE_URL = "http://api.openweathermap.org/data/2.5/forecast"
 BASE_URL2 = "http://api.openweathermap.org/data/2.5/weather"
 
@@ -22,14 +24,15 @@ r4 = requests.get(url4)
 w_d =r4.json()
 
 
-time = r4["list"][4]["dt_txt"]
-tenki = str(r4["list"][4]["weather"]["description"])
-t_max = str(r4["list"][4]["main"]["temp_max"])
-t_min = str(r4["list"][4]["main"]["temp_min"])
+
+time = w_d["list"][4]["dt_txt"]
+tenki = w_d["list"][4]["weather"][0]["description"]
+t_max = w_d["list"][4]["main"]["temp_max"]
+t_min = w_d["list"][4]["main"]["temp_min"]
 
 
 
-tweeting_text = "こんばんは！"+time+"の天気予報です。\n天気は"+tenki+"\n最高気温は"+t_max+"度、最低気温は"+t_min+"です。"
+tweeting_text = "こんばんは！"+time+"の天気予報です。\n天気は"+str(tenki)+"\n最高気温は"+str(t_max)+"度、最低気温は"+str(t_min)+"です。"
 
 
 url_media = "https://upload.twitter.com/1.1/media/upload.json"
@@ -60,4 +63,4 @@ if req_media.status_code != 200:
     print ("テキストアップデート失敗: %s", req_text.text)
     exit()
 
-print ("OK")
+print ("投稿できました！")
