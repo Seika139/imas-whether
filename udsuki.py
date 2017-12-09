@@ -1,8 +1,7 @@
 #encoding:utf-8
 import get_tenki as gt
 
-aisatsu = "皆さんおはようございます！島村卯月の\
-「デレマス朝の天気予報」のコーナーです。"
+aisatsu = "皆さんおはようございます！島村卯月の「デレマス朝の天気予報」のコーナーです。"
 tenki = "本日の{}の天気は「{}」、".format(gt.place,gt.weather)
 kion = "最高気温は{}度、最低気温は{}度です。".format(gt.kion_box[0],gt.kion_box[1])
 
@@ -28,7 +27,7 @@ elif "307" in gt.weather_id or "308" in gt.weather_id:
 
 
 #降水確率のチェック
-else:
+elif "雨" in gt.weather or min(gt.rain) >= 10:
     if min(gt.rain[1],gt.rain[2],gt.rain[3]) >= 30:
         c_text = "今日は1日を通じて降水確率が{}％を越えそうです。出かけるときは\
 傘を忘れずに持っていきましょう".format(min(gt.rain[1],gt.rain[2],gt.rain[3]))
@@ -44,15 +43,24 @@ else:
     elif gt.rain[2] >= 30:
         c_text = "今日は午後の降水確率が{}％となっています。傘があると\
 良いでしょう。".format(gt.rain[2])
+    else: c_text = "それでは、今日も一日頑張っていきましょう！"
 
-    #どの条件にも一致しなかった場合
-    else:
-        c_text = "それでは、今日も一日頑張っていきましょう！"
+#気温が低いとき
+elif int(gt.kion_box[0]) <= 10:
+    c_text = "冷え込むので、暖かい格好をして出かけましょう！"
+
+#気温が高いとき
+elif int(gt.kionbox[0]) >= 30:
+    c_text = "暑いので熱中症には気をつけてくださいね!"
+
+#どの条件にも一致しなかった場合
+else: c_text = "それでは、今日も一日頑張っていきましょう！"
 
 
 
 #最終的な文章の合成
 f_text = aisatsu+"\n"+tenki+kion+"\n"+c_text+"\n"+"#デレマス朝の天気予報"
+
 print(f_text)
 print(len(f_text),"words")
 

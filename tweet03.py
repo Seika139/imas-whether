@@ -15,14 +15,20 @@ CS = os.environ["CONSUMER_SECRET"]        # Consumer Secret
 
 
 #キャラクターの決定
-idl_num = nmr.randint(0,2)
+idl_num = nmr.randint(0,3)
 
 if idl_num == 0:
     import udsuki as idl
-    idl_photo = 'udsuki2.jpg'
+    p_num = nmr.randint(0,4)
+    idl_photo = 'udsuki0{}.jpg'.format(p_num)
 elif idl_num == 1:
     import rin as idl
-    idl_photo = 'rin.jpg'
+    p_num = nmr.randint(0,4)
+    idl_photo = 'rin.0{}jpg'.format(p_num)
+elif idl_num == 2:
+    import mio as idl
+    p_num = nmr.randint(0,3)
+    idl_photo = 'mio0{}.jpg'.format(p_num)
 
 #ツイートする文章の決定
 tweeting_text = idl.f_text

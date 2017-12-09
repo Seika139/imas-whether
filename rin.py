@@ -28,7 +28,7 @@ elif "307" in gt.weather_id or "308" in gt.weather_id:
 
 
 #降水確率のチェック
-else:
+elif "雨" in gt.weather or min(gt.rain) >= 10:
     if min(gt.rain[1],gt.rain[2],gt.rain[3]) >= 30:
         c_text = "今日は1日を通じて降水確率が{}％を越えそうだから、出かけるときは\
 傘を忘れずにね。".format(min(gt.rain[1],gt.rain[2],gt.rain[3]))
@@ -44,10 +44,18 @@ else:
     elif gt.rain[2] >= 30:
         c_text = "今日は午後の降水確率が{}％だよ。傘…\
 持って行ってね。".format(gt.rain[2])
+    else: c_text = "以上、今日の天気予報でした。"
 
-    #どの条件にも一致しなかった場合
-    else:
-        c_text = "以上、天気予報でした…"
+#気温が低いとき
+elif int(gt.kion_box[0]) <= 10:
+    c_text = "冷え込むから、暖かい格好をして出かけてね。"
+
+#気温が高いとき
+elif int(gt.kion_box[0]) >= 30:
+    c_text = "暑いから水分をよく摂って熱中症に気をつけてね。"
+
+#どの条件にも一致しなかった場合
+else: c_text = "以上、今日の天気予報でした。"
 
 
 
