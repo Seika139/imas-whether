@@ -1,14 +1,33 @@
 #!/usr/bin/env python
 # coding: utf-8
-
+import os
 import json
 from requests_oauthlib import OAuth1Session
+import requests
+import urllib.request
+import numpy.random as nmr
 
-AT = "863556291729301504-MaPF7pwhLQtFwUrtMIzxS0gQd7wEEOC"
-AS = "fCp80ufrYK6rMVI9lqC0SOiXE6kRlTj4T7lhw6aZdKDw1"
-CK = "fSMitUng7w3UkXU4kCMYrXmC6"
-CS = "SSsyuo4tE6RW8yQLAZJLLa9795NYcd4mppLnkEDHOcv6iuSIqU"
+#Herokuの環境変数
+AT = os.environ["ACCESS_TOKEN"]           # Access Token
+AS = os.environ["ACCESS_TOKEN_SECRET"]    # Accesss Token Secert
+CK = os.environ["CONSUMER_KEY"]           # Consumer Key
+CS = os.environ["CONSUMER_SECRET"]        # Consumer Secret
 
+
+#キャラクターの決定
+idl_num = nmr.randint(0,2)
+
+if idl_num == 0:
+    import udsuki as idl
+    idl_photo = 'udsuki2.jpg'
+elif idl_num == 1:
+    import rin as idl
+    idl_photo = 'rin.jpg'
+
+#ツイートする文章の決定
+tweeting_text = idl.f_text
+
+#ここから下は雛型おなじ
 
 url_media = "https://upload.twitter.com/1.1/media/upload.json"
 url_text = "https://api.twitter.com/1.1/statuses/update.json"
@@ -17,7 +36,7 @@ url_text = "https://api.twitter.com/1.1/statuses/update.json"
 twitter = OAuth1Session(CK, CS, AT, AS)
 
 # 画像投稿
-files = {"media" : open('miku.png', 'rb')}
+files = {"media" : open(idl_photo , 'rb')}
 req_media = twitter.post(url_media, files = files)
 
 # レスポンスを確認
@@ -30,7 +49,7 @@ media_id = json.loads(req_media.text)['media_id']
 print ("Media ID: %d" % media_id)
 
 # Media ID を付加してテキストを投稿
-params = {'status': '今日のもぐきちはなつ姉きてる', "media_ids": [media_id]}
+params = {'status': tweeting_text , "media_ids": [media_id]}
 req_media = twitter.post(url_text, params = params)
 
 # 再びレスポンスを確認
@@ -38,4 +57,4 @@ if req_media.status_code != 200:
     print ("テキストアップデート失敗: %s", req_text.text)
     exit()
 
-print ("OK")
+print ("投稿できました！")

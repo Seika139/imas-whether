@@ -1,0 +1,26 @@
+#crontabの使い方
+
+
+
+# Heroku のコマンド
+
+環境変数を参照する時
+heroku config --app gentle-crag-58603
+
+gentle-crag-58603　の　tweet02.py を動かす時
+heroku run python tweet02.py --app gentle-crag-58603
+
+requirements.txt に追加するとき
+pip freeze | grep -e "bottle" -e "twitter" -e "APScheduler" -e "numpy" -e "json" -e "requests" > requirements.txt
+
+出力例
+bottle==0.12.13
+numpy==1.11.3
+numpydoc==0.6.0
+python-twitter==3.3
+twitter==1.18.0
+
+
+#今までにあったミス
+環境変数のキーの入れ替え
+画像が重すぎる

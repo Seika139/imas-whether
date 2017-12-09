@@ -24,22 +24,7 @@ id_img1 = pic_upload.media.upload(media=image_data)["media_id_string"]
 t.statuses.update(status=status,media_ids=",".join([id_img1]))
 
 
-"""
-環境変数を参照する時
-heroku config --app gentle-crag-58603
 
-gentle-crag-58603　の　tweet02.py を動かす時
-heroku run python tweet02.py --app gentle-crag-58603
-
-requirements.txt に追加するとき
-pip freeze | grep -e "bottle" -e "twitter" -e "APScheduler" -e "numpy" -e "json" -e "requests" > requirements.txt
-
-bottle==0.12.13
-numpy==1.11.3
-numpydoc==0.6.0
-python-twitter==3.3
-twitter==1.18.0
-"""
 
 """
 -----> PHP app detected
