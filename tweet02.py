@@ -12,6 +12,7 @@ AS = os.environ["ACCESS_TOKEN_SECRET"]    # Accesss Token Secert
 CK = os.environ["CONSUMER_KEY"]           # Consumer Key
 CS = os.environ["CONSUMER_SECRET"]        # Consumer Secret
 
+
 #Openweathermapの環境変数
 API_KEY = os.environ["API_KEY"]
 
@@ -35,6 +36,8 @@ t_min = w_d["list"][4]["main"]["temp_min"]
 tweeting_text = "こんばんは！"+time+"の天気予報です。\n天気は"+str(tenki)+"\n最高気温は"+str(t_max)+"度、最低気温は"+str(t_min)+"です。"
 
 
+
+
 url_media = "https://upload.twitter.com/1.1/media/upload.json"
 url_text = "https://api.twitter.com/1.1/statuses/update.json"
 
@@ -42,7 +45,7 @@ url_text = "https://api.twitter.com/1.1/statuses/update.json"
 twitter = OAuth1Session(CK, CS, AT, AS)
 
 # 画像投稿
-files = {"media" : open('udsuki2.jpg', 'rb')}
+files = {"media" : open('miku.png', 'rb')}
 req_media = twitter.post(url_media, files = files)
 
 # レスポンスを確認

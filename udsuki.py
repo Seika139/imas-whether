@@ -50,7 +50,7 @@ elif int(gt.kion_box[0]) <= 10:
     c_text = "冷え込むので、暖かい格好をして出かけましょう！"
 
 #気温が高いとき
-elif int(gt.kionbox[0]) >= 30:
+elif int(gt.kion_box[0]) >= 30:
     c_text = "暑いので熱中症には気をつけてくださいね!"
 
 #どの条件にも一致しなかった場合

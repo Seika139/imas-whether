@@ -13,7 +13,6 @@ AS = os.environ["ACCESS_TOKEN_SECRET"]    # Accesss Token Secert
 CK = os.environ["CONSUMER_KEY"]           # Consumer Key
 CS = os.environ["CONSUMER_SECRET"]        # Consumer Secret
 
-
 #キャラクターの決定
 idl_num = nmr.randint(0,3)
 
@@ -30,11 +29,12 @@ elif idl_num == 2:
     p_num = nmr.randint(0,3)
     idl_photo = 'mio0{}.jpg'.format(p_num)
 
+idl_photo = "pictures/" + idl_photo
+
 #ツイートする文章の決定
 tweeting_text = idl.f_text
 
-#ここから下は雛型おなじ
-
+#ここから下は雛型とおなじ
 url_media = "https://upload.twitter.com/1.1/media/upload.json"
 url_text = "https://api.twitter.com/1.1/statuses/update.json"
 

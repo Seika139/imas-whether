@@ -44,11 +44,11 @@ elif "雨" in gt.weather or min(gt.rain) >= 10:
 
 #気温が低いとき
 elif int(gt.kion_box[0]) <= 10:
-    c_text = "今日も寒いけど、元気出して行ってみよ〜！"
+    c_text = "今日も寒いけど、元気出していってみよ〜！"
 
 #気温が高いとき
-elif int(gt.kionbox[0]) >= 30:
-    c_text = "暑すぎて倒れそう〜。こまめに水分を摂って熱中症対策だ☆"
+elif int(gt.kion_box[0]) >= 30:
+    c_text = "暑すぎて倒れそう〜。こまめに水分を摂って熱中症対策だね☆"
 
 #どの条件にも一致しなかった場合
 else: c_text = "それじゃあみんな、行ってらっしゃ〜い！"

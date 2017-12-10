@@ -17,7 +17,7 @@ url_text = "https://api.twitter.com/1.1/statuses/update.json"
 twitter = OAuth1Session(CK, CS, AT, AS)
 
 # 画像投稿
-files = {"media" : open('miku.png', 'rb')}
+files = {"media" : open('pictures/miku.png', 'rb')}
 req_media = twitter.post(url_media, files = files)
 
 # レスポンスを確認
@@ -30,7 +30,7 @@ media_id = json.loads(req_media.text)['media_id']
 print ("Media ID: %d" % media_id)
 
 # Media ID を付加してテキストを投稿
-params = {'status': '今日のもぐきちはなつ姉きてる', "media_ids": [media_id]}
+params = {'status': 'お疲れさまです', "media_ids": [media_id]}
 req_media = twitter.post(url_text, params = params)
 
 # 再びレスポンスを確認
