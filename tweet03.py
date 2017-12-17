@@ -14,7 +14,7 @@ CK = os.environ["CONSUMER_KEY"]           # Consumer Key
 CS = os.environ["CONSUMER_SECRET"]        # Consumer Secret
 
 #キャラクターの決定
-idl_num = nmr.randint(0,3)
+idl_num = nmr.randint(0,6)
 
 if idl_num == 0:
     import udsuki as idl
@@ -28,7 +28,30 @@ elif idl_num == 2:
     import mio as idl
     p_num = nmr.randint(1,4)
     idl_photo = 'mio0{}.jpg'.format(p_num)
+elif idl_num == 3:
+    import anzu as idl
+    p_num = nmr.randint(1,11)
+    if p_num >= 10:
+        idl_photo = 'anzu{}.jpg'.format(p_num)
+    else:
+        idl_photo = 'anzu0{}.jpg'.format(p_num)
+elif idl_num == 4:
+    import anastasia as idl
+    p_num = nmr.randint(1,13)
+    if p_num >= 10:
+        idl_photo = 'anastasia{}.jpg'.format(p_num)
+    else:
+        idl_photo = 'anastasia0{}.jpg'.format(p_num)
+elif idl_num == 5:
+    import yuko as idl
+    if "温泉" in idl.c_text:
+        p_num = nmt.randint(1,3)
+        idl_photo = 'yuko2{}.jpg'.format(p_num)
+    else:
+        p_num = nmr.randint(1,11)
+        idl_photo = 'yuko0{}.jpg'.format(p_num)
 
+#最終的な画像のパスを指定
 idl_photo = "pictures/" + idl_photo
 
 #ツイートする文章の決定
