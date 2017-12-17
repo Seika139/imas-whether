@@ -34,7 +34,7 @@ if "雪" in gt.weather and "雨か雪" not in gt.weather:
 
 #ただの「晴れ」の場合
 elif "100" in gt.weather_id:
-    c_text = "今日はとってもいい天気！お昼寝日和だぁ〜"
+    c_text = "今日はいい天気ですね！さいきっくぱわーを磨くにはもってこいです！"
 
 #強い雨が降る場合
 elif "307" in gt.weather_id or "308" in gt.weather_id:
