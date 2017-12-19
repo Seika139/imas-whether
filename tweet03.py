@@ -20,32 +20,31 @@ if idl_num == 0:
     import udsuki as idl
     p_num = nmr.randint(1,34)
     idl_photo = 'udsuki0{}.jpg'.format(p_num)
+
 elif idl_num == 1:
     import rin as idl
     p_num = nmr.randint(1,33)
-    idl_photo = 'rin.0{}jpg'.format(p_num)
+    idl_photo = 'rin0{}.jpg'.format(p_num)
+
 elif idl_num == 2:
     import mio as idl
     p_num = nmr.randint(1,10)
     idl_photo = 'mio0{}.jpg'.format(p_num)
+
 elif idl_num == 3:
     import anzu as idl
     p_num = nmr.randint(1,11)
-    if p_num >= 10:
-        idl_photo = 'anzu{}.jpg'.format(p_num)
-    else:
-        idl_photo = 'anzu0{}.jpg'.format(p_num)
+    idl_photo = 'anzu0{}.jpg'.format(p_num)
+
 elif idl_num == 4:
     import anastasia as idl
     p_num = nmr.randint(1,13)
-    if p_num >= 10:
-        idl_photo = 'anastasia{}.jpg'.format(p_num)
-    else:
-        idl_photo = 'anastasia0{}.jpg'.format(p_num)
+    idl_photo = 'anastasia0{}.jpg'.format(p_num)
+
 elif idl_num == 5:
     import yuko as idl
     if "温泉" in idl.c_text:
-        p_num = nmt.randint(1,3)
+        p_num = nmr.randint(1,3)
         idl_photo = 'yuko2{}.jpg'.format(p_num)
     else:
         p_num = nmr.randint(1,11)
