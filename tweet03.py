@@ -18,15 +18,15 @@ idl_num = nmr.randint(0,6)
 
 if idl_num == 0:
     import udsuki as idl
-    p_num = nmr.randint(1,5)
+    p_num = nmr.randint(1,34)
     idl_photo = 'udsuki0{}.jpg'.format(p_num)
 elif idl_num == 1:
     import rin as idl
-    p_num = nmr.randint(1,5)
+    p_num = nmr.randint(1,33)
     idl_photo = 'rin.0{}jpg'.format(p_num)
 elif idl_num == 2:
     import mio as idl
-    p_num = nmr.randint(1,4)
+    p_num = nmr.randint(1,10)
     idl_photo = 'mio0{}.jpg'.format(p_num)
 elif idl_num == 3:
     import anzu as idl
