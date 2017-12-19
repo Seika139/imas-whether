@@ -9,12 +9,12 @@ def aisatsu():
     if num == 0:
         aisatsu = "えー今日の天気予報、杏の番なの？？\nしょーがないな…"
     elif num == 1 :
-        aisatsu = "みんな、だらだらしてる〜？双葉杏の天気予報の時間だよー"
+        aisatsu = "みんな、おはよ〜！みくのにゃんにゃん天気予報始まるよー"
     return aisatsu
 
 aisatsu = aisatsu()
 tenki = "今日の{}の天気は「{}」、".format(gt.place,gt.weather)
-kion = "最高気温は{}度、最低気温は{}度でーす。".format(gt.kion_box[0],gt.kion_box[1])
+kion = "最高気温は{}度、最低気温は{}度だにゃ！".format(gt.kion_box[0],gt.kion_box[1])
 
 #最後の天気によっって変化する文章
 c_text = ""
@@ -86,4 +86,4 @@ print(len(f_text),"words")
 
 
 if __name__ == "__main__":
-    print("このモジュールは双葉杏の「デレマス朝の天気予報」をお伝えします。")
+    print("このモジュールは前川みくの「デレマス朝の天気予報」をお伝えします。")
