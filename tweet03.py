@@ -33,7 +33,7 @@ elif idl_num == 2:
 
 elif idl_num == 3:
     import anzu as idl
-    p_num = nmr.randint(1,11)
+    p_num = nmr.randint(1,36)
     idl_photo = 'anzu0{}.jpg'.format(p_num)
 
 elif idl_num == 4:
