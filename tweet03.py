@@ -14,7 +14,7 @@ CK = os.environ["CONSUMER_KEY"]           # Consumer Key
 CS = os.environ["CONSUMER_SECRET"]        # Consumer Secret
 
 #キャラクターの決定
-idl_num = nmr.randint(0,6)
+idl_num = nmr.randint(0,7)
 
 if idl_num == 0:
     import udsuki as idl
@@ -49,6 +49,14 @@ elif idl_num == 5:
     else:
         p_num = nmr.randint(1,11)
         idl_photo = 'yuko0{}.jpg'.format(p_num)
+
+elif idl_num == 6:
+    import miku as idl
+    if "魚" in idl.c_text:
+        idl_photo = "miku041,jpg"
+    else:
+        p_num = nmr.randint(1,38)
+        idl_photo = 'miku0{}.jpg'.format(p_num)
 
 #最終的な画像のパスを指定
 idl_photo = "pictures/" + idl_photo

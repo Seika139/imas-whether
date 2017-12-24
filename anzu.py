@@ -6,10 +6,8 @@ import numpy.random as nmr
 #挨拶の文章
 def aisatsu():
     num = nmr.randint(2)
-    if num == 0:
-        aisatsu = "えー今日の天気予報、杏の番なの？？しょーがないな…"
-    elif num == 1 :
-        aisatsu = "みんな、だらだらしてる〜？双葉杏の天気予報の時間だよー"
+    if num == 0: aisatsu = "えー今日の天気予報、杏の番なの？？しょーがないな…"
+    elif num == 1 : aisatsu = "みんな、だらだらしてる〜？双葉杏の天気予報の時間だよー"
     return aisatsu
 
 aisatsu = aisatsu()
