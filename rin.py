@@ -5,50 +5,51 @@ aisatsu = "みんなおはよう…渋谷凛です。今日の天気予報をお
 tenki = "今日の{}の天気は「{}」、".format(gt.place,gt.weather)
 kion = "最高気温は{}度、最低気温は{}度の予報です。".format(gt.kion_box[0],gt.kion_box[1])
 
-#最後の天気によっって変化する文章
-c_text = ""
+#最後の天気によっって変化する文章の辞書
+d_text = {}
+d_text["snow"] = "今日は雪が降る予報だよ。交通機関が遅延するかもだから、そっちもチェックしてみてね。"
+d_text["fine"] = "今日はとてもいい天気になりそう…こんな日にライブしたいなぁ…なんてね。"
+d_text["storm"] = "今日は雨も風も強いみたい…出かけるときは気をつけてね。"
+d_text["r_123"] = "今日は1日を通じて降水確率が{}％を越えそうだから、出かけるときは傘を忘れずにね。".format(min(gt.rain[1],gt.rain[2],gt.rain[3]))
+d_text["r_12"] = "今日は午前中の降水確率が{}％、午後は{}％となる見込みだよ。傘を忘れずに持っていってね。".format(gt.rain[1],gt.rain[2])
+d_text["r_23"] = "今日は午後の降水確率が{}％、夜は{}％だから、雨が降ってなくても傘を持っていくといいかもね。".format(gt.rain[2],gt.rain[3])
+d_text["r_3"] = "今日は夜の降水確率が{}％。夕方から雨が降りそうだよ…帰りが遅い人は傘を忘れずにね。".format(gt.rain[3])
+d_text["r_2"] = "今日は午後の降水確率が{}％だよ。傘…持って行ってね。".format(gt.rain[2])
+d_text["nothing"] = "以上、今日の天気予報でした。"
+d_text["under10"] = "冷え込むから、暖かい格好をして出かけてね。"
+d_text["over30"] = "暑いから水分をよく摂って熱中症に気をつけてね。"
 
 #雪が降る場合
-if "雪" in gt.weather and "雨か雪" not in gt.weather:
-    c_text = "今日は雪が降る予報だよ。交通機関が遅延するかもだから、そっちも…チェックしてみてね。"
-
+if "雪" in gt.weather and "雨か雪" not in gt.weather: c_text = d_text["snow"]
 #ただの「晴れ」の場合
-elif "100" in gt.weather_id:
-    c_text = "今日はとてもいい天気になりそう…\nこんな日にライブしたいなぁ…なんてね。"
-
+elif "100" in gt.weather_id: c_text = d_text["fine"]
 #強い雨が降る場合
-elif "307" in gt.weather_id or "308" in gt.weather_id:
-    c_text = "今日は雨も風も強いみたい…出かけるときは気をつけてね。"
-
+elif "307" in gt.weather_id or "308" in gt.weather_id: c_text = d_text["storm"]
 #雷の恐れがある場合
-
 
 #降水確率のチェック
 elif "雨" in gt.weather or min(gt.rain) >= 10:
     if min(gt.rain[1],gt.rain[2],gt.rain[3]) >= 30:
-        c_text = "今日は1日を通じて降水確率が{}％を越えそうだから、出かけるときは\
-傘を忘れずにね。".format(min(gt.rain[1],gt.rain[2],gt.rain[3]))
+        c_text = d_text["r_123"]        #1日を通して降水確率が30%以上
     elif min(gt.rain[1],gt.rain[2]) >= 30:
-        c_text = "今日は午前中の降水確率が{}％、午後は{}％となる見込みだよ。傘を忘れずに持っていってね。".format(gt.rain[1],gt.rain[2])
+        c_text = d_text["r_12"]      #午前と午後の降水確率が30%以上
     elif min(gt.rain[2],gt.rain[3]) >= 30:
-        c_text = "今日は午後の降水確率が{}％、夜は{}％だから、雨が降ってなくても、傘を持っていくといいかもね。".format(gt.rain[2],gt.rain[3])
+        c_text = d_text["r_23"]     #午後と夜の降水確率が30%以上
     elif gt.rain[3] >= 30:
-        c_text = "今日は夜の降水確率が{}％。夕方から雨が降りそうだよ…帰りが遅い人は傘を忘れずにね。".format(gt.rain[3])
+        c_text = d_text["r_3"]      #夜の降水確率が30%以上
     elif gt.rain[2] >= 30:
-        c_text = "今日は午後の降水確率が{}％だよ。傘…持って行ってね。".format(gt.rain[2])
-    else: c_text = "以上、今日の天気予報でした。"
+        c_text = d_text["r_2"]      #午後の降水確率が30%以上
+    else:
+        c_text = d_text["nothing"]      #それ以外
 
 #気温が低いとき
-elif int(gt.kion_box[0]) <= 10:
-    c_text = "冷え込むから、暖かい格好をして出かけてね。"
+elif int(gt.kion_box[0]) <= 10: c_text = d_text["under10"]
 
 #気温が高いとき
-elif int(gt.kion_box[0]) >= 30:
-    c_text = "暑いから水分をよく摂って熱中症に気をつけてね。"
+elif int(gt.kion_box[0]) >= 30: c_text = d_text["over30"]
 
 #どの条件にも一致しなかった場合
-else: c_text = "以上、今日の天気予報でした。"
-
+else: c_text = d_text["nothing"]
 
 
 #最終的な文章の合成
@@ -58,4 +59,14 @@ print(len(f_text),"words")
 
 
 if __name__ == "__main__":
+    print("#"*60)
     print("このモジュールは渋谷凛の「デレマス朝の天気予報」をお伝えします。")
+    print("文字数のチェックを実施します。")
+    print("="*60)
+    print(aisatsu,":",len(aisatsu),"words")
+    print(tenki+kion,":",len(tenki+kion),"words")
+    print("残り文字数",140-len(aisatsu)-len(tenki+kion)-11,"words")
+    for i in d_text:
+        print("-"*60)
+        print(i,":",d_text[i],":",len(d_text[i]),"words")
+    print("-"*60)
