@@ -1,5 +1,5 @@
 #encoding:utf-8
-import get_tenki_hukuoka as gt
+import get_tenki_tokyo as gt
 import numpy.random as nmr
 
 

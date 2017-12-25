@@ -17,7 +17,7 @@ root = ET.fromstring(XmlData)
 #それぞれの値の用意
 area = root.findall(".//area[@id='東京地方']")
 for youso in area:
-    place = youso.get("id")
+    place = "東京"
     day1 = youso.find("info")
     reporting_date = day1.get("date")
     weather = day1[0].text

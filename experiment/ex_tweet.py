@@ -22,60 +22,61 @@ while l_idl_num[2] in l_idl_num[:2]:
 while l_idl_num[3] in l_idl_num[:3]:
     l_idl_num[3] =  nmr.randint(7)
 
-
 #ループの作成
+place_list = ["sendai","tokyo","osaka","fukuoka"]
+
 for i in range(4):
+    place = place_list[i]
+    idl_num = l_idl_num[i]
 
-    if i == 0:
-        idl_num = nmr.randint(2)
-        if idl_num == 0:
-            import udsuki as idl
-            p_num = nmr.randint(1,34)
-            idl_photo = 'udsuki0{}.jpg'.format(p_num)
+    if idl_num == 0:
+        import udsuki as idl
+        p_num = nmr.randint(1,34)
+        idl_photo = 'udsuki0{}.jpg'.format(p_num)
 
-        elif idl_num == 1:
-            import rin as idl
-            p_num = nmr.randint(1,33)
-            idl_photo = 'rin0{}.jpg'.format(p_num)
-
-    elif i == 1:
-        idl_num = nmr.randint(2)
-        if idl_num == 0:
-            import mio as idl
-            p_num = nmr.randint(1,10)
-            idl_photo = 'mio0{}.jpg'.format(p_num)
-
-        elif idl_num == 1:
-            import anzu as idl
-            p_num = nmr.randint(1,36)
-            idl_photo = 'anzu0{}.jpg'.format(p_num)
-
-    elif i == 2:
-        idl_num = nmr.randint(2)
-        if idl_num == 0:
-            import anastasia as idl
-            p_num = nmr.randint(1,13)
-            idl_photo = 'anastasia0{}.jpg'.format(p_num)
-
-        elif idl_num == 1:
-            import yuko as idl
-            if "温泉" in idl.c_text:
-                p_num = nmr.randint(1,3)
-                idl_photo = 'yuko2{}.jpg'.format(p_num)
-            else:
-                p_num = nmr.randint(1,11)
-                idl_photo = 'yuko0{}.jpg'.format(p_num)
+    elif idl_num == 1:
+        import rin as idl
+        p_num = nmr.randint(1,33)
+        idl_photo = 'rin0{}.jpg'.format(p_num)
 
 
-    elif i == 3:
-        idl_num = nmr.randint(1)
-        if idl_num == 0:
-            import miku as idl
-            if "魚" in idl.c_text:
-                idl_photo = "miku041,jpg"
-            else:
-                p_num = nmr.randint(1,38)
-                idl_photo = 'miku0{}.jpg'.format(p_num)
+    idl_num = nmr.randint(2)
+    if idl_num == 0:
+        import mio as idl
+        p_num = nmr.randint(1,10)
+        idl_photo = 'mio0{}.jpg'.format(p_num)
+
+    elif idl_num == 1:
+        import anzu as idl
+        p_num = nmr.randint(1,36)
+        idl_photo = 'anzu0{}.jpg'.format(p_num)
+
+
+    idl_num = nmr.randint(2)
+    if idl_num == 0:
+        import anastasia as idl
+        p_num = nmr.randint(1,13)
+        idl_photo = 'anastasia0{}.jpg'.format(p_num)
+
+    elif idl_num == 1:
+        import yuko as idl
+        if "温泉" in idl.c_text:
+            p_num = nmr.randint(1,3)
+            idl_photo = 'yuko2{}.jpg'.format(p_num)
+        else:
+            p_num = nmr.randint(1,11)
+            idl_photo = 'yuko0{}.jpg'.format(p_num)
+
+
+
+    idl_num = nmr.randint(1)
+    if idl_num == 0:
+        import miku as idl
+        if "魚" in idl.c_text:
+            idl_photo = "miku041,jpg"
+        else:
+            p_num = nmr.randint(1,38)
+            idl_photo = 'miku0{}.jpg'.format(p_num)
 
     #最終的な画像のパスを指定
     idl_photo = "pictures/" + idl_photo
