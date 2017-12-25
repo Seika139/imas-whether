@@ -15,7 +15,7 @@ root = ET.fromstring(XmlData)
 
 
 #それぞれの値の用意
-area = root.findall(".//area[@id=大阪府]")
+area = root.findall(".//area[@id='大阪府']")
 for youso in area:
     place = "大阪"
     day1 = youso.find("info")
