@@ -3,12 +3,18 @@
 #モジュールのインポート
 import xml.etree.ElementTree as ET
 import urllib.request as ur
-from tweet04 import f_id,f_url,f_area_name
+from tweet04 import inter_num
 
 
+l_url = ["http://www.drk7.jp/weather/xml/04.xml","http://www.drk7.jp/weather/xml/13.xml","http://www.drk7.jp/weather/xml/27.xml","http://www.drk7.jp/weather/xml/40.xml"]
+l_id = ["東部","東京地方","大阪府","福岡地方"]
+l_area_name = ["仙台","東京","大阪","福岡"]
+
+f_id = l_id[inter_num]
+f_area_name = l_area_name[inter_num]
 
 #urlを入れる
-url = f_url
+url = l_url[inter_num]
 req = ur.Request(url)
 
 #データの取得

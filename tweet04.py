@@ -14,15 +14,11 @@ CK = os.environ["CONSUMER_KEY"]           # Consumer Key
 CS = os.environ["CONSUMER_SECRET"]        # Consumer Secret
 
 #ループに用いるリスト
-l_url = ["http://www.drk7.jp/weather/xml/04.xml","http://www.drk7.jp/weather/xml/13.xml","http://www.drk7.jp/weather/xml/27.xml","http://www.drk7.jp/weather/xml/40.xml"]
-l_id = ["東部","東京地方","大阪府","福岡地方"]
-l_area_name = ["仙台","東京","大阪","福岡"]
+
 
 #ループの作成
 for i in range(4):
-    f_url = l_url[i]
-    f_id = l_id[i]
-    f_area_name = l_area_name[i]
+    inter_num = i
 
     if i == 0:
         idl_num = nmr.randint(2)
