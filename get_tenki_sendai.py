@@ -10,8 +10,8 @@ l_url = ["http://www.drk7.jp/weather/xml/04.xml","http://www.drk7.jp/weather/xml
 l_id = ["東部","東京地方","大阪府","福岡地方"]
 l_area_name = ["仙台","東京","大阪","福岡"]
 
-f_id = l_id[inter_num]
-f_area_name = l_area_name[inter_num]
+f_id = l_id[i]
+f_area_name = l_area_name[i]
 
 #urlを入れる
 url = l_url[inter_num]
