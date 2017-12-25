@@ -1,5 +1,5 @@
 #encoding:utf-8
-import get_tenki as gt
+import get_tenki2 as gt
 
 aisatsu = "みんなおはよう…渋谷凛です。今日の天気予報をお知らせします。"
 tenki = "今日の{}の天気は「{}」、".format(gt.place,gt.weather)

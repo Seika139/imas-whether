@@ -16,7 +16,6 @@ with ur.urlopen(req) as response:
     XmlData = response.read()
 root = ET.fromstring(XmlData)
 
-
 #それぞれの値の用意
 area = root.findall(".//area[@id={}]".format(f_id))
 for youso in area:
