@@ -18,6 +18,7 @@ CS = os.environ["CONSUMER_SECRET"]        # Consumer Secret
 
 #ループの作成
 for i in range(4):
+    inter_num = i
 
     if i == 0:
         idl_num = nmr.randint(2)
