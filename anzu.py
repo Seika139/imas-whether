@@ -1,5 +1,5 @@
 #encoding:utf-8
-import get_tenki as gt
+import get_tenki2 as gt
 import numpy.random as nmr
 
 
