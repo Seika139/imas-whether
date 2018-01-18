@@ -53,7 +53,7 @@ elif idl_num == 5:
 elif idl_num == 6:
     import miku as idl
     if "魚" in idl.c_text:
-        idl_photo = "miku041,jpg"
+        idl_photo = "miku041.jpg"
     else:
         p_num = nmr.randint(1,38)
         idl_photo = 'miku0{}.jpg'.format(p_num)
