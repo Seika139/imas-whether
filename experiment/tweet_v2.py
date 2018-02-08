@@ -89,7 +89,7 @@ for i in range(4):
         import yuko_v2
         yuko = yuko_v2.Yuko(gt.gt_box_array[x_num],x_num)
         tweeting_text = yuko.f_text
-        if "温泉" in idl.c_text:
+        if "温泉" in tweeting_text:
             p_num = nmr.randint(1,3)
             idl_photo = 'yuko2{}.jpg'.format(p_num)
         elif "ビーム" in tweeting_text: idl_photo = 'yuko010.jpg'
@@ -144,3 +144,8 @@ for i in range(4):
 
     #連投防止のための一時停止
     time.sleep(30)
+
+"""
+gentle-crag-58603　の　tweet03.py を動かす時
+heroku run python tweet03.py --app gentle-crag-58603
+"""
