@@ -93,7 +93,7 @@ class Miku:
             else: self.c_text = nothing(self)      #それ以外
 
         #気温の寒暖差が激しい場合
-        elif self.kion_box[0] - self.kion_box[1] >= 15:
+        elif int(self.kion_box[0]) - int(self.kion_box[1]) >= 15:
             self.c_text = self.d_text["kionsa"]
 
         #気温が0度以下
