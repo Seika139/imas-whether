@@ -10,7 +10,8 @@ import time
 #実行する時間の取得
 import datetime as dt
 xd = dt.datetime.today()
-xh = xd.hour
+xdj = xd - datetime.timedelta(hours=9)) #Herokuでは時間帯がUTCなので9時間前にずらす
+xh = xdj.hour
 if xh >= 0 and xh <= 12: x_num = 0
 else: x_num = 1
 
@@ -143,7 +144,7 @@ for i in range(4):
     print ("投稿できました！")
 
     #連投防止のための一時停止
-    time.sleep(30)
+    if i <=2: time.sleep(30)
 
 """
 gentle-crag-58603　の　tweet03.py を動かす時

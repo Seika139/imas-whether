@@ -4,7 +4,7 @@ import gt_v2 as p_gt
 import mio_v2 as p_mio
 
 gt = p_gt.Get_tenki("http://www.drk7.jp/weather/xml/13.xml",'東京地方',"東京")
-mio = p_mio.Mio(gt.gt_box_array[0])
+mio = p_mio.Mio(gt.gt_box_array[0],0)
 print("*"*10)
 print(mio.f_text)
 
