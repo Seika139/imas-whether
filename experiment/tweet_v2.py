@@ -10,7 +10,7 @@ import time
 #実行する時間の取得
 import datetime as dt
 xd = dt.datetime.today()
-xdj = xd - datetime.timedelta(hours=9)) #Herokuでは時間帯がUTCなので9時間前にずらす
+xdj = xd - datetime.timedelta(hours=9) #Herokuでは時間帯がUTCなので9時間前にずらす
 xh = xdj.hour
 if xh >= 0 and xh <= 12: x_num = 0
 else: x_num = 1
