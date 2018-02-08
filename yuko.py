@@ -7,7 +7,7 @@ import numpy.random as nmr
 def aisatsu():
     num = nmr.randint(2)
     if num == 0:
-        aisatsu = "みなさん、おはようございます！エスパーユッコこと、堀裕子のさいきっく天気予報の時間です！"
+        aisatsu = "みなさん、おはようございます！エスパーユッコのさいきっく天気予報の時間です！"
     elif num == 1 :
         aisatsu = "むむむーんっ、今からユッコのさいきっくぱわーで天気を予知しちゃいますよ！"
     return aisatsu

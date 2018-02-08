@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # coding: utf-8
 import os
 import json
@@ -6,6 +5,14 @@ from requests_oauthlib import OAuth1Session
 import requests
 import urllib.request
 import numpy.random as nmr
+import time
+
+#実行する時間の取得
+import datetime as dt
+xd = dt.datetime.today()
+xh = xd.hour
+if xh >= 0 and xh <= 12: x_num = 0
+else: x_num = 1
 
 #Herokuの環境変数
 AT = os.environ["ACCESS_TOKEN"]           # Access Token
@@ -13,7 +20,7 @@ AS = os.environ["ACCESS_TOKEN_SECRET"]    # Accesss Token Secert
 CK = os.environ["CONSUMER_KEY"]           # Consumer Key
 CS = os.environ["CONSUMER_SECRET"]        # Consumer Secret
 
-#予報するアイドルの番号の決定（被りが怒らないようにする）
+#予報するアイドルの番号の決定（被りが発生しないようにする）
 l_idl_num = nmr.randint(0,7,4)
 while l_idl_num[0] == l_idl_num[1]:
     l_idl_num[1] = nmr.randint(7)
@@ -23,57 +30,79 @@ while l_idl_num[3] in l_idl_num[:3]:
     l_idl_num[3] =  nmr.randint(7)
 
 #ループの作成
-place_list = ["sendai","tokyo","osaka","fukuoka"]
-
 for i in range(4):
-    place = place_list[i]
-    idl_num = l_idl_num[i]
+    import gt_v2
+    if i == 0:
+        gt = gt_v2.Get_tenki("http://www.drk7.jp/weather/xml/04.xml",'東部',"仙台")
+    elif i == 1:
+        gt = gt_v2.Get_tenki("http://www.drk7.jp/weather/xml/13.xml",'東京地方',"東京")
+    elif i == 2:
+        gt = gt_v2.Get_tenki("http://www.drk7.jp/weather/xml/27.xml",'大阪府',"大阪")
+    elif i == 3:
+        gt = gt_v2.Get_tenki("http://www.drk7.jp/weather/xml/40.xml",'福岡地方',"福岡")
 
+
+    idl_num = l_idl_num[i]
     if idl_num == 0:
-        import udsuki as idl
-        p_num = nmr.randint(1,34)
-        idl_photo = 'udsuki0{}.jpg'.format(p_num)
+        import udsuki_v2
+        udsuki = udsuki_v2.Udsuki(gt.gt_box_array[x_num],x_num)
+        tweeting_text = udsuki.f_text
+        if "海" in tweeting_text:
+            p_num = nmr.randint(1,3)
+            idl_photo = 'udsuki04{}.jpg'.format(p_num)
+        else:
+            p_num = nmr.randint(1,32)
+            idl_photo = 'udsuki0{}.jpg'.format(p_num)
 
     elif idl_num == 1:
-        import rin as idl
-        p_num = nmr.randint(1,33)
-        idl_photo = 'rin0{}.jpg'.format(p_num)
+        import rin_v2
+        rin = rin_v2.Rin(gt.gt_box_array[x_num],x_num)
+        tweeting_text = rin.f_text
+        if "海" in tweeting_text:
+            idl_photo = 'rin041.jpg'
+        else:
+            p_num = nmr.randint(1,32)
+            idl_photo = 'rin0{}.jpg'.format(p_num)
 
-
-    idl_num = nmr.randint(2)
-    if idl_num == 0:
-        import mio as idl
+    elif idl_num == 2:
+        import mio_v2
+        mio = mio_v2.Mio(gt.gt_box_array[x_num],x_num)
+        tweeting_text = mio.f_text
         p_num = nmr.randint(1,10)
         idl_photo = 'mio0{}.jpg'.format(p_num)
 
-    elif idl_num == 1:
-        import anzu as idl
+    elif idl_num == 3:
+        import anzu_v2
+        anzu = anzu_v2.Anzu(gt.gt_box_array[x_num],x_num)
+        tweeting_text = anzu.f_text
         p_num = nmr.randint(1,36)
         idl_photo = 'anzu0{}.jpg'.format(p_num)
 
-
-    idl_num = nmr.randint(2)
-    if idl_num == 0:
-        import anastasia as idl
+    elif idl_num == 4:
+        import anastasia_v2
+        anastasia = anastasia_v2.Anastasia(gt.gt_box_array[x_num],x_num)
+        tweeting_text = anastasia.f_text
         p_num = nmr.randint(1,13)
         idl_photo = 'anastasia0{}.jpg'.format(p_num)
 
-    elif idl_num == 1:
-        import yuko as idl
+    elif idl_num == 5:
+        import yuko_v2
+        yuko = yuko_v2.Yuko(gt.gt_box_array[x_num],x_num)
+        tweeting_text = yuko.f_text
         if "温泉" in idl.c_text:
             p_num = nmr.randint(1,3)
             idl_photo = 'yuko2{}.jpg'.format(p_num)
+        elif "ビーム" in tweeting_text: idl_photo = 'yuko010.jpg'
         else:
             p_num = nmr.randint(1,11)
             idl_photo = 'yuko0{}.jpg'.format(p_num)
 
-
-
-    idl_num = nmr.randint(1)
-    if idl_num == 0:
-        import miku as idl
-        if "魚" in idl.c_text:
-            idl_photo = "miku041,jpg"
+    if idl_num == 6:
+        import miku_v2
+        miku = miku_v2.Miku(gt.gt_box_array[x_num],x_num)
+        tweeting_text = miku.f_text
+        if "魚" in tweeting_text:
+            idl_photo = "miku041.jpg"
         else:
             p_num = nmr.randint(1,38)
             idl_photo = 'miku0{}.jpg'.format(p_num)
@@ -81,8 +110,6 @@ for i in range(4):
     #最終的な画像のパスを指定
     idl_photo = "pictures/" + idl_photo
 
-    #ツイートする文章の決定
-    tweeting_text = idl.f_text
 
     #ここから下は雛型とおなじ
     url_media = "https://upload.twitter.com/1.1/media/upload.json"
@@ -114,3 +141,6 @@ for i in range(4):
         exit()
 
     print ("投稿できました！")
+
+    #連投防止のための一時停止
+    time.sleep(30)
