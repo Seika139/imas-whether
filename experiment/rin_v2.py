@@ -127,9 +127,15 @@ class  Rin:
 
 
 if __name__ == "__main__":
+    import datetime as dt
+    xd = dt.datetime.today()
+    xh = xd.hour
+    if xh >= 0 and xh <= 12: x_num = 0
+    else: x_num = 1
+
     import gt_v2
     gt = gt_v2.Get_tenki("http://www.drk7.jp/weather/xml/13.xml",'東京地方',"東京")
-    cin = Rin(gt.gt_box_array[0],0)
+    cin = Rin(gt.gt_box_array[x_num],x_num)
     print("\n"+"#"*60)
     print("このモジュールは渋谷凛の「デレマス朝の天気予報」をお伝えします。")
     print("文字数のチェックを実施します。")
