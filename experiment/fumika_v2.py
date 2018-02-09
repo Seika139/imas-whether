@@ -16,8 +16,10 @@ class Fumika:
 
         if self.time == 0:
             self.x_date = "今日"
+            self.ht = "#デレマス朝の天気予報"
         else:
             self.x_date = "明日"
+            self.ht = "#デレマス夜の天気予報"
 
         #月日の取得
         self.xdt = dt.datetime.today()
@@ -138,7 +140,7 @@ class Fumika:
 
 
         #最終的な文章の合成
-        self.f_text = self.aisatsu+"\n"+self.tenki+self.kion+"\n"+self.c_text+"\n"+"#デレマス朝の天気予報"
+        self.f_text = self.aisatsu+"\n"+self.tenki+self.kion+"\n"+self.c_text+"\n"+self.ht
         print(self.f_text)
         print(len(self.f_text),"words")
 

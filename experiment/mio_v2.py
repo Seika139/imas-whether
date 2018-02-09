@@ -11,12 +11,15 @@ class Mio:
         self.rain = box[6]
         self.time = time
 
+
         if self.time == 0:
             self.x_date = "今日"
             self.aisatsu = "みんな、おっはよ〜！本田未央の天気予報の時間だよ☆"
+            self.ht = "#デレマス朝の天気予報"
         else:
             self.x_date = "明日"
             self.aisatsu = "こんばんは、本田未央だよ☆ みんなに明日の天気を教えてあげよう！"
+            self.ht = "#デレマス夜の天気予報"
 
         self.tenki = "{}の{}の天気は「{}」、".format(self.x_date,self.place,self.weather)
         self.kion = "最高気温は{}度、最低気温は{}度の予報だよ！".format(self.kion_box[0],self.kion_box[1])
@@ -80,7 +83,7 @@ class Mio:
 
 
         #最終的な文章の合成
-        self.f_text = self.aisatsu+"\n"+self.tenki+self.kion+"\n"+self.c_text+"\n"+"#デレマス朝の天気予報"
+        self.f_text = self.aisatsu+"\n"+self.tenki+self.kion+"\n"+self.c_text+"\n"+self.ht
         print(self.f_text)
         print(len(self.f_text),"words")
 
