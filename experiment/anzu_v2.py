@@ -87,8 +87,7 @@ class Anzu:
                 self.c_text = self.d_text["r_3"]      #夜の降水確率が30%以上
             elif self.rain[2] >= 30:
                 self.c_text = self.d_text["r_2"]      #午後の降水確率が30%以上
-            else:
-                self.c_text = nothing(self)      #それ以外
+            else: self.c_text = nothing(self)         #それ以外
 
         #気温の寒暖差が激しい場合
         elif int(self.kion_box[0]) - int(self.kion_box[1]) >= 15:
@@ -107,7 +106,7 @@ class Anzu:
             elif num == 1: self.c_text =  self.d_text["over30-2"]
 
         #どの条件にも一致しなかった場合
-        else: self.c_text = nothing()
+        else: self.c_text = nothing(self)
 
 
         #最終的な文章の合成

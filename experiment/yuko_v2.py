@@ -118,7 +118,7 @@ class  Yuko:
             elif num == 1: self.c_text =  self.d_text["over30-2"]
 
         #どの条件にも一致しなかった場合
-        else: self.c_text = nothing()
+        else: self.c_text = nothing(self)
 
 
         #最終的な文章の合成
@@ -133,7 +133,7 @@ if __name__ == "__main__":
     xh = xd.hour
     if xh >= 0 and xh <= 12: x_num = 0
     else: x_num = 1
-    
+
     import gt_v2
     gt = gt_v2.Get_tenki("http://www.drk7.jp/weather/xml/13.xml",'東京地方',"東京")
     cin = Yuko(gt.gt_box_array[x_num],x_num)

@@ -116,7 +116,7 @@ class Anastasia:
             elif num == 1: self.c_text =  self.d_text["over30-2"]
 
         #どの条件にも一致しなかった場合
-        else: self.c_text = nothing()
+        else: self.c_text = nothing(self)
 
 
         #最終的な文章の合成

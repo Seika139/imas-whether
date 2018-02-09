@@ -22,7 +22,7 @@ CK = os.environ["CONSUMER_KEY"]           # Consumer Key
 CS = os.environ["CONSUMER_SECRET"]        # Consumer Secret
 
 #予報するアイドルの番号の決定（被りが発生しないようにする）
-l_idl_num = nmr.randint(0,7,4)
+l_idl_num = nmr.randint(0,10,4)
 while l_idl_num[0] == l_idl_num[1]:
     l_idl_num[1] = nmr.randint(7)
 while l_idl_num[2] in l_idl_num[:2]:
@@ -98,7 +98,7 @@ for i in range(4):
             p_num = nmr.randint(1,11)
             idl_photo = 'yuko0{}.jpg'.format(p_num)
 
-    if idl_num == 6:
+    elif idl_num == 6:
         import miku_v2
         miku = miku_v2.Miku(gt.gt_box_array[x_num],x_num)
         tweeting_text = miku.f_text
@@ -107,6 +107,42 @@ for i in range(4):
         else:
             p_num = nmr.randint(1,38)
             idl_photo = 'miku0{}.jpg'.format(p_num)
+
+    elif idl_num == 7:
+        import yoshino_v2
+        yoshino = yoshino_v2.Yoshino(gt.gt_box_array[x_num],x_num)
+        tweeting_text = yoshino.f_text
+        if "桜" or "紗枝" in tweeting_text:
+            p_num = nmr.randint(1,3)
+            idl_photo = 'yoshino3{}.jpg'.format(p_num)
+        else:
+            p_num = nmr.randint(1,25)
+            idl_photo = 'yoshino{}.jpg'.format(p_num)
+
+    elif idl_num == 8:
+        import arisu_v2
+        arisu = arisu_v2.Arisu(gt.gt_box_array[x_num],x_num)
+        tweeting_text = arisu.f_text
+        if "イチゴ" or "いちご" in tweeting_text:
+            p_num = nmr.randint(1,6)
+            idl_photo = 'arisu_str{}.jpg'.format(p_num)
+        else:
+            p_num = nmr.randint(1,24)
+            idl_photo = 'arisu{}.jpg'.format(p_num)
+
+    elif idl_num == 9:
+        import momoka_v2
+        momoka = momoka_v2.Momoka(gt.gt_box_array[x_num],x_num)
+        tweeting_text = momoka.f_text
+        if "夜更かし" in tweeting_text:
+            p_num = nmr.randint(1,3)
+            idl_photo = 'momoka_yofukashi{}.jpg'.format(p_num)
+        elif "紅茶" or "ローズヒップティー" in tweeting_text:
+            p_num = nmr.randint(1,3)
+            idl_photo = 'momoka_tea{}.jpg'.format(p_num)
+        else:
+            p_num = nmr.randint(1,31)
+            idl_photo = 'momoka{}.jpg'.format(p_num)
 
     #最終的な画像のパスを指定
     idl_photo = "pictures/" + idl_photo
