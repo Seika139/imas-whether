@@ -2,7 +2,7 @@
 import numpy.random as nmr
 import datetime as dt
 
-class Momoka:
+class Fumika:
     def __init__(self,box,time):
 
         self.place = box[0]
@@ -19,55 +19,59 @@ class Momoka:
         else:
             self.x_date = "明日"
 
+        #月日の取得
+        self.xdt = dt.datetime.today()
+        self.sm = self.xdt.month
+        self.sd = self.xdt.day
+
         #挨拶の文章
         def aisatsu(self):
             if self.time == 0:
                 num = nmr.randint(2)
-                if num == 0: self.aisatsu = "みなさん、櫻井桃華のお送りする天気予報の時間ですわよ。"
-                else: self.aisatsu = "おはようございます、櫻井桃華ですわ。{}の天気予報の時間ですの。".format(self.x_date)
+                if num == 0: self.aisatsu = "あ、あの、…鷺沢文香のお送りする天気予報の時間です…"
+                else: self.aisatsu = "…おはようございます、鷺沢文香です。{}の天気予報をお伝えしますね…".format(self.x_date)
             else:
                 num = nmr.randint(2)
-                if num == 0: self.aisatsu = "みなさん、櫻井桃華のお送りする天気予報の時間ですわよ。"
-                elif num == 1 : self.aisatsu = "こんばんは、櫻井桃華ですわ。{}の天気予報の時間ですの。".format(self.x_date)
+                if num == 0: self.aisatsu = "あ、あの、…鷺沢文香のお送りする天気予報の時間です…"
+                elif num == 1 : self.aisatsu = "…こんばんは、鷺沢文香です。{}の天気予報の時間です…".format(self.x_date)
             return self.aisatsu
 
         self.aisatsu = aisatsu(self)
 
 
-        self.tenki = "{}の{}の天気は「{}」、".format(self.x_date,self.place,self.weather)
-        self.kion = "最高気温は{}度、最低気温は{}度の予報ですわ。".format(self.kion_box[0],self.kion_box[1])
+        self.tenki = "{}の{}の天気は「{}」…、".format(self.x_date,self.place,self.weather)
+        self.kion = "最高気温は{}度、最低気温は{}度の予報です…".format(self.kion_box[0],self.kion_box[1])
 
         #最後の天気によっって変化する文章の辞書
         self.d_text = {}
-        if self.place == "仙台": self.d_text["nothing1"] = "続いては東京の天気ですの。"
-        elif self.place == "東京": self.d_text["nothing1"] = "続いては大阪の天気ですの。"
-        elif self.place == "大阪": self.d_text["nothing1"] = "続いては福岡の天気ですの。"
-        elif self.place == "福岡": self.d_text["nothing1"] = "天気予報、明日もチェックしてくださいまし。".format(self.x_date)
+        if self.place == "仙台": self.d_text["nothing1"] = "続いては東京の天気です…"
+        elif self.place == "東京": self.d_text["nothing1"] = "続いては大阪の天気です…"
+        elif self.place == "大阪": self.d_text["nothing1"] = "続いては福岡の天気です…"
+        elif self.place == "福岡": self.d_text["nothing1"] = "天気予報…明日もチェックしてくださいね…".format(self.x_date)
         if self.time == 0:
-            self.d_text["nothing2"] = "寝坊するのはめっ！ですわよ♪"
-            self.d_text["nothing3"] = "朝食はきちんと食べまして？基本ですわよ。"
-            self.d_text["nothing4"] = "ほら、もう行かないと遅刻ですわよ！"
+            self.d_text["nothing2"] = "春眠暁を覚えずとは言うものの、朝はいつでも眠いもので…"
+            self.d_text["nothing3"] = "一日の計は朝にあり…と、早起きして良い一日を…"
         elif self.time == 1:
-            self.d_text["nothing2"] = "夜更かしするのはちょっとドキドキしますわ！"
-            self.d_text["nothing3"] = "ふわぁ…ね、眠くなんかありませんわっ！"
-            self.d_text["nothing4"] = "夜更かししたら明日起きられない…？そんな子供じゃありませんわよ！"
-        self.d_text["nothing5"] = "ローズヒップティーは適温で。おぼえてくださいまし♪"
-        self.d_text["snow1"] =  "雪遊び…たまにははしゃぐのもいいかもしれませんわね♪"
-        self.d_text["snow2"] =  "雪で滑ってしまわないよう注意ですわ！私なら大丈夫ですの。"
-        self.d_text["fine"] = "{}はいい天気になるようですの。お庭でローズヒップティーを嗜むのもいいですわね♪".format(self.x_date)
-        self.d_text["storm"] = "{}は荒れた天気になるようですの。不要な外出はお控えくださいまし。".format(self.x_date)
-        self.d_text["r_123"] = "{}は１日を通して降水確率が{}％を越えるようですの。傘を忘れずにお出かけなさいませ。".format(self.x_date,min(self.rain[1],self.rain[2],self.rain[3]))
-        self.d_text["r_12"] = "午前中の降水確率が{}％、午後は{}％ですの。外出時には、傘を持って行ってくださいな。".format(self.rain[1],self.rain[2])
-        self.d_text["r_23"] = "午後の降水確率が{}％、夜は{}％ですの。雨が降ってなくても傘を持っていってくださいな。".format(self.rain[2],self.rain[3])
-        self.d_text["r_3"] = "{}は夜の降水確率が{}％ですわ。遅くまで外出する人は傘を持っていきなさいませ。".format(self.x_date,self.rain[3])
-        self.d_text["r_2"] = "{}は午後の降水確率が{}％ですわ。出かける時は傘をお持ちになってくださいな。".format(self.x_date,self.rain[2])
-        self.d_text["under10-1"] = "{}は冷え込みますの。暖かい格好でお出かけなさいまし。".format(self.x_date)
-        self.d_text["under10-2"] = "みなさん寒い中がんばってらして…私も負けてられませんわ！"
-        self.d_text["under0-1"] = "{}は寒いですわ。寒さ対策はしっかりしてくださいな。".format(self.x_date)
-        self.d_text["under0-2"] = "こんな寒い日は温かい紅茶が欲しくなりますわね。"
-        self.d_text["over30-1"] = "暑いですわね…アイスティーが飲みたい気分ですわ♪"
-        self.d_text["over30-2"] = "{}は暑いですわ。事務所のみなさんと海にいくのもいいですわね♪".format(self.x_date)
-        self.d_text["kionsa"] = "{}は気温差の激しい１日になりますわ。脱ぎ着のしやすい服装がよろしいですわ。".format(self.x_date)
+            self.d_text["nothing2"] = "ナイトプール…美波さんは泳ぎが達者で…"
+            self.d_text["nothing3"] = "…本を読んでいたら、いつの間にか…夜に…"
+        self.d_text["nothing4"] = "…あ、お勧めの本があれば、お教えください。ジャンルは…そうですね……"
+        self.d_text["nothing5"] = "……最近は本屋と喫茶店が合わさったお店があるようで。"
+        self.d_text["snow1"] =  "雪…。私の地元では、高く積もっていて…"
+        self.d_text["snow2"] =  "蛍雪の功…？…いえ、私は読書が好きなだけで…"
+        self.d_text["fine"] = "{}はいい天気になるようで…。たまには外に出て日差しを浴びるのも…".format(self.x_date)
+        self.d_text["storm"] = "{}は荒れた天気の予報で…。晴耕雨読と言いますので、家で読書はいかがでしょうか…".format(self.x_date)
+        self.d_text["r_123"] = "…{}は１日を通して降水確率が{}％を越えるようです。その…、傘を忘れずにお出かけください…".format(self.x_date,min(self.rain[1],self.rain[2],self.rain[3]))
+        self.d_text["r_12"] = "…午前中の降水確率が{}％、午後は{}％です。その…、雨具が必要ですよ…".format(self.rain[1],self.rain[2])
+        self.d_text["r_23"] = "…午後の降水確率が{}％、夜は{}％です。雨が降ってなくても傘を持っていってください…".format(self.rain[2],self.rain[3])
+        self.d_text["r_3"] = "…{}は夜の降水確率が{}％です。その…遅くまで外出する人は傘をお持ちに…".format(self.x_date,self.rain[3])
+        self.d_text["r_2"] = "{}は午後の降水確率が{}％ですので…、出かける時は傘をお持ちください…".format(self.x_date,self.rain[2])
+        self.d_text["under10-1"] = "{}は冷え込みますのでお体に気をつけて…".format(self.x_date)
+        self.d_text["under10-2"] = "冬来たりなば春遠からじ…今は寒さに耐えましょう…"
+        self.d_text["under0-1"] = "…{}は寒いですね。寒さ対策はしっかりと…".format(self.x_date)
+        self.d_text["under0-2"] = "動かないと体が冷えますね…"
+        self.d_text["over30-1"] = "今日はレッスン…暑いのがこたえますね…"
+        self.d_text["over30-2"] = "…外は暑いですが、部屋の中は涼しくて…快適に読書ができます…"
+        self.d_text["kionsa"] = "{}は気温差の激しい１日になると…。脱ぎ着のしやすい服装がよろしいかと…".format(self.x_date)
 
         #何もない時の文章
         def nothing(self):
@@ -148,9 +152,9 @@ if __name__ == "__main__":
 
     import gt_v2
     gt = gt_v2.Get_tenki("http://www.drk7.jp/weather/xml/13.xml",'東京地方',"東京")
-    cin = Momoka(gt.gt_box_array[x_num],x_num)
+    cin = Fumika(gt.gt_box_array[x_num],x_num)
     print("\n"+"#"*60)
-    print("このモジュールは櫻井桃華の「デレマス朝の天気予報」をお伝えします。")
+    print("このモジュールは鷺沢文香の「デレマス朝の天気予報」をお伝えします。")
     print("文字数のチェックを実施します。")
     print("="*60)
     print(cin.aisatsu,":",len(cin.aisatsu),"words")

@@ -59,7 +59,7 @@ class  Arisu:
         self.d_text["snow2"] =  "雪…雪だるま…。な、何でもありません！"
         self.d_text["fine"] = "{}はいい天気になるようですが、どこかのプロデューサーみたいに浮かれてちゃダメですよ！".format(self.x_date)
         self.d_text["storm"] = "{}の天気は大荒れのようですが、レッスンならできます！".format(self.x_date)
-        self.d_text["r_123"] = "{}は１日を通して降水確率が{}％を越えそうです。傘が忘れずに出かけましょう。".format(self.x_date,min(self.rain[1],self.rain[2],self.rain[3]))
+        self.d_text["r_123"] = "{}は１日を通して降水確率が{}％を越えそうです。傘を忘れずに出かけましょう。".format(self.x_date,min(self.rain[1],self.rain[2],self.rain[3]))
         self.d_text["r_12"] = "午前中の降水確率が{}％、午後は{}％です。外出時には、傘を持って行ってください。".format(self.rain[1],self.rain[2])
         self.d_text["r_23"] = "午後の降水確率が{}％、夜は{}％です。雨が降ってなくても傘を持っていくのがよいでしょう。".format(self.rain[2],self.rain[3])
         self.d_text["r_3"] = "{}は夜の降水確率が{}％です。遅くまで外出する人は傘を持っていきましょう。".format(self.x_date,self.rain[3])

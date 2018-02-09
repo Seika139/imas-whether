@@ -22,7 +22,7 @@ CK = os.environ["CONSUMER_KEY"]           # Consumer Key
 CS = os.environ["CONSUMER_SECRET"]        # Consumer Secret
 
 #予報するアイドルの番号の決定（被りが発生しないようにする）
-l_idl_num = nmr.randint(0,10,4)
+l_idl_num = nmr.randint(0,11,4)
 while l_idl_num[0] == l_idl_num[1]:
     l_idl_num[1] = nmr.randint(7)
 while l_idl_num[2] in l_idl_num[:2]:
@@ -143,6 +143,16 @@ for i in range(4):
         else:
             p_num = nmr.randint(1,31)
             idl_photo = 'momoka{}.jpg'.format(p_num)
+
+    elif idl_num == 10:
+        import fumika_v2
+        fumika = fumika_v2.Fumika(gt.gt_box_array[x_num],x_num)
+        tweeting_text = fumika.f_text
+        if "ナイトプール" in tweeting_text:
+            idl_photo = 'fumika27.jpg'
+        else:
+            p_num = nmr.randint(1,29)
+            idl_photo = 'fumika{}.jpg'.format(p_num)
 
     #最終的な画像のパスを指定
     idl_photo = "pictures/" + idl_photo
