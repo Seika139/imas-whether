@@ -3,6 +3,9 @@ def show_text(show,text):
     if show =="1": print(text)
 
 def mini_check(show,length,box):
+    def omit(a,i):
+        y = str(len(a))+' '*3+i+' '*abs(12-len(i))+': '+a
+        return y
     longest = 0
     text = ""
     if type(box)==list:
@@ -15,20 +18,29 @@ def mini_check(show,length,box):
         for i in box:
             if type(box[i])==list:
                 for j in box[i]:
-                    show_text(show,str(len(j))+': '+j)
+                    show_text(show,omit(j,i))
                     if len(j) >= longest:
                         longest = len(j)
                         text = j
+            elif type(box[i])==dict:
+                for key in box[i]:
+                    if type(key)==int:
+                        show_text(show,omit(box[i][key],i))
+                        if len(box[i][key]) >= longest:
+                            longest = len(box[i][key])
+                            text = box[i][key]
             else:
-                show_text(show,str(len(box[i]))+': '+box[i])
+                show_text(show,omit(box[i],i))
                 if len(box[i]) >= longest:
                     longest = len(box[i])
                     text = box[i]
+    atn = ''
+    if show =='1': atn = '*'*5+' '
     if longest > length:
-        print("最長のものが{}文字で規定の長さ{}文字を超えています。".format(longest,length))
+        print("{}最長のものが{}文字で規定の長さ{}文字を超えています。".format(atn,longest,length))
         print("最長の文章は\n",text)
     else:
-        print("最長のものが{}文字なので規定の長さ{}文字以内を満たしています。".format(longest,length))
+        print("{}最長のものが{}文字なので規定の長さ{}文字以内を満たしています。".format(atn,longest,length))
     print("-"*50)
 
 def length_check(show,box_list):

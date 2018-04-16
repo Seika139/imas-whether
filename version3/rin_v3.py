@@ -100,42 +100,61 @@ class Rin:
             ]
         self.d_text["w_cold_max"] = "{}は最高気温がここ一週間で一番低いんだって。風邪ひかないように気をつけてね。".format(date)
         self.d_text["w_cold_min"] = "{}はここ一週間で一番冷え込むんだって。体を冷やさないようにね。".format(date)
+        """
         if self.kion_max >= 25:
             self.d_text["w_hot_max"] = "{}は急に暑くなるから、体調管理に気をつけてね。".format(date)
         else:
             self.d_text["w_hot_max"] = "{}はここ最近で一番暖かいよ。涼しめの服装がいいかも…".format(date)
-
         """
         self.d_text["w_hot_max"] = {
-            'kion_max_25':{
-                'higher': "{}は急に暑くなるから、体調管理に気をつけてね。".format(date),
-                'lower' : "{}はここ最近で一番暖かいよ。涼しめの服装がいいかも…".format(date)
-                }
+            'term':'kion_max',
+            'cases':2,
+            'border':25,
+            1 : "{}は急に暑くなるから、体調管理に気をつけてね。".format(date),
+            0 : "{}はここ最近で一番暖かいよ。涼しめの服装がいいかも…".format(date)
             }
-        a = (
-         self.kion_max,
-         25,
-         "",
-         ""
-         )
         """
-
-
         if self.kion_min >= 18:
             self.d_text["w_hot_min"] = "{}はここ一週間で最低気温が一番高いんだって。ちょっと暑いかもね".format(date)
         else:
             self.d_text["w_hot_min"] = "{}はここ一週間で最低気温が一番高いんだって。過ごしやすい日になるかな…".format(date)
+        """
+        self.d_text['w_cold_min'] = {
+            'term':'kion_min',
+            'cases':2,
+            'border':18,
+            1 : "{}はここ一週間で最低気温が一番高いんだって。ちょっと暑いかもね".format(date),
+            0 : "{}はここ一週間で最低気温が一番高いんだって。過ごしやすい日になるかな…".format(date)
+            }
+        """
         if self.kion_max >= 25:
             self.d_text["y_hot_max"]="{}は{}よりも{}度も暑いんだって。涼しい格好の方がいいかもね。".format(date,pre_date,rbs(self.kion_max-s_data[0][0]))
         else:
             self.d_text["y_hot_max"] = "{}は{}よりも{}度も暖かいって。気温差に注意してね。".format(date,pre_date,rbs(self.kion_max-s_data[0][0]))
+        """
+        self.d_text['y_hot_max'] = {
+            'term':'kion_max',
+            'cases':2,
+            'border':25,
+            1 : "{}は{}よりも{}度も暑いんだって。涼しい格好の方がいいかもね。".format(date,pre_date,rbs(self.kion_max-s_data[0][0])),
+            0 : "{}は{}よりも{}度も暖かいって。気温差に注意してね。".format(date,pre_date,rbs(self.kion_max-s_data[0][0]))
+            }
         self.d_text["y_hot_min"] = "{}は{}よりも最低気温が{}度も高いんだって。気温差に気をつけてね。".format(date,pre_date,rbs(self.kion_min-s_data[1][0]))
         self.d_text["y_hot_min"] = "{}は{}よりも最低気温が{}度も高いんだって。気温差に気をつけてね。".format(date,pre_date,rbs(self.kion_min-s_data[1][0]))
         self.d_text["y_cold_max"] = '{}は{}よりも最高気温が{}度も低くて、とても冷え込みそうだよ。'.format(date,pre_date,rbs(self.kion_max-s_data[0][0]))
         self.d_text["y_cold_min"] = '{}は{}よりも最低気温が{}度も低くて、とても冷え込みそうだよ。'.format(date,pre_date,rbs(self.kion_min-s_data[1][0]))
         #雪が降る＆積雪が十分にある
+        self.d_text['snow_1-10'] = {
+            'term':'kion_max',
+            'cases':2,
+            'border':1,
+            1 : "{}はさらに雪が積もりそうだよ。また事務所に雪だるまが増えてそう。".format(date),
+            0 : '現在の積雪は{}cmだけど、まだまだ積もりそうだね。'.format(s_data[3][0])
+            }
+        """
         if am_pm ==0: self.d_text['snow_1-10'] = '現在の積雪は{}cmだけど、まだまだ積もりそうだね。'.format(s_data[3][0])
         else: self.d_text["snow_1-10"] = "{}はさらに雪が積もりそうだよ。また事務所に雪だるまが増えてそう。".format(date)
+        """
         #雪が降る＆まあまあの積雪
         if am_pm ==0: self.d_text['snow_1-1'] = '現在の積雪は{}cmだけど、さらに積もりそうだね。'.format(s_data[3][0])
         else: self.d_text["snow_1-1"] = "{}の降雪でまた雪が積もるかもだね。".format(date)
@@ -178,7 +197,16 @@ class Rin:
         elif type(self.d_text[cond[0]])==list:
             self.c_text = self.d_text[cond[0]][nmr.randint(len(self.d_text[cond[0]]))]
         elif type(self.d_text[cond[0]])==dict:
-            pass
+            x = self.d_text[cond[0]]
+            if x['term'] == 'kion_max': elemnt = self.kion_max
+            elif x['term'] == 'kion_min': elemnt = self.kion_min
+            elif x['term'] == 'am_pm': elemnt = am_pm
+
+            if elemnt >= x['border']:
+                self.c_text = x[1]
+            else:
+                self.c_text = x[0]
+
         else:
             self.c_text = self.d_text[cond[0]]
 
