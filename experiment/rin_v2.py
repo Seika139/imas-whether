@@ -48,7 +48,7 @@ class  Rin:
         self.d_text["snow"] = "{}は雪が降る予報だよ。交通機関が遅延するかもだから、そっちもチェックしてみてね。".format(self.x_date)
         self.d_text["fine"] = "{}はとてもいい天気になりそう…こんな日にライブしたいなぁ…なんてね。".format(self.x_date)
         self.d_text["storm"] = "{}は雨も風も強いみたい…出かけるときは気をつけてね。".format(self.x_date)
-        self.d_text["r_123"] = "{}は1日を通じて降水確率が{}％を越えそうだから、出かけるときは傘を忘れずにね。".format(self.x_date,min(self.rain[1],self.rain[2],self.rain[3]))
+        self.d_text["r_123"] = "{}は1日を通じて降水確率が{}％を越えそうだから、出かけるときは傘を忘れずにね。".format(self.x_date,min(self.rain[1:]))
         self.d_text["r_12"] = "{}は午前中の降水確率が{}％、午後は{}％となる見込みだよ。傘を忘れずに持っていってね。".format(self.x_date,self.rain[1],self.rain[2])
         self.d_text["r_23"] = "{}は午後の降水確率が{}％、夜は{}％だから、雨が降ってなくても傘を持っていくといいかもね。".format(self.x_date,self.rain[2],self.rain[3])
         self.d_text["r_3"] = "{}は夜の降水確率が{}％。夕方から雨が降りそうだよ…帰りが遅い人は傘を忘れずにね。".format(self.x_date,self.rain[3])

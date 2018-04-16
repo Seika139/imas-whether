@@ -47,7 +47,7 @@ class  Udsuki:
         self.d_text["snow"] = "{}は雪が降る予報になっています。交通機関の情報にも注意して出かけてくださいね！".format(self.x_date)
         self.d_text["fine"] = "{}はよく晴れたいい天気になりそうで、私も頑張れそうです！皆さんも良い1日を〜♪".format(self.x_date)
         self.d_text["storm"] = "{}は強い雨と風が吹き荒れるようです。出かける際は十分に気をつけてくださいね！".format(self.x_date)
-        self.d_text["r_123"] = "{}は1日を通じて降水確率が{}％を越えそうです。出かけるときは傘を忘れずに持っていきましょう".format(self.x_date,min(self.rain[1],self.rain[2],self.rain[3]))
+        self.d_text["r_123"] = "{}は1日を通じて降水確率が{}％を越えそうです。出かけるときは傘を忘れずに持っていきましょう".format(self.x_date,min(self.rain[1:]))
         self.d_text["r_12"] = "{}は午前中の降水確率が{}％、午後は{}％となる見込みです。傘を忘れずに持っていきましょう。".format(self.x_date,self.rain[1],self.rain[2])
         self.d_text["r_23"] = "{}は午後の降水確率が{}％、夜は{}％となっています。傘を持っていくといいでしょう。".format(self.x_date,self.rain[2],self.rain[3])
         self.d_text["r_3"] = "{}は夜の降水確率が{}％となっています。帰りが遅い人は傘を持っていくといいでしょう。".format(self.x_date,self.rain[3])
