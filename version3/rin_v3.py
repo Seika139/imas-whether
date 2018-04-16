@@ -1,5 +1,6 @@
 import numpy.random as nmr
 import datetime as dt
+import common_function as cf
 
 class Rin:
     def __init__(self,am_pm,japan,prediction,cond,s_data):
@@ -113,14 +114,15 @@ class Rin:
             self.d_text["w_hot_max"] = "{}は急に暑くなるから、体調管理に気をつけてね。".format(date)
         else:
             self.d_text["w_hot_max"] = "{}はここ最近で一番暖かいよ。涼しめの服装がいいかも…".format(date)
+
         """
-        self.d_text["今週で一番暑い_max"] = {
+        self.d_text["w_hot_max"] = {
             'kion_max_25':{
-                'higher': "{}は急に暑くなるから、体調管理に気をつけてね。".format(date)
+                'higher': "{}は急に暑くなるから、体調管理に気をつけてね。".format(date),
                 'lower' : "{}はここ最近で一番暖かいよ。涼しめの服装がいいかも…".format(date)
                 }
             }
-         = (
+        a = (
          self.kion_max,
          25,
          "",
@@ -147,7 +149,7 @@ class Rin:
         if am_pm ==0: self.d_text['snow_1-10'] = '現在の積雪は{}cmだけど、まだまだ積もりそうだね。'.format(s_data[3][0])
         else: self.d_text["snow_1-10"] = "{}はさらに雪が積もりそうだよ。また事務所に雪だるまが増えてそう。".format(date)
         #雪が降る＆まあまあの積雪
-        if am_pm ==0: self.d_text['snow_1-1'] = '現在の積雪は{}cmですが、さらに積もりそうですね。'.format(s_data[3][0])
+        if am_pm ==0: self.d_text['snow_1-1'] = '現在の積雪は{}cmだけど、さらに積もりそうだね。'.format(s_data[3][0])
         else: self.d_text["snow_1-1"] = "{}の降雪でまた雪が積もるかもだね。".format(date)
         #雪が降る＆積雪なし
         self.d_text["snow_1-0"] = "{}は雪が降るみたいだから、交通機関の情報にも注意してね。".format(date)
@@ -158,14 +160,14 @@ class Rin:
         self.d_text["snow_0-1"] = "うっかりして、凍った雪で滑らないようにね。"
 
         self.d_text['nothing_am']= [
-            'それでは、今日も１日頑張っていきましょう！',
-            '島村卯月、今日も１日頑張ります！',
-            '夜の天気予報もチェックしてくださいね。'
+            "うん、それじゃあ今日も一日頑張ろう。",
+            'じゃあ、みんな遅刻しないようにね。',
+            '夜の天気予報もチェックよろしくね。'
             ]
         self.d_text['nothing_pm']= [
-            'それでは、明日も頑張っていきましょう！',
-            '今日も１日お疲れ様でした！',
-            '次の天気予報もチェックしてくださいね。'
+            'ふぅ…じゃあみんな、おやすみなさい。',
+            '今日はお疲れ様。夜更かししないようにね。',
+            '明日の天気予報もチェックしてね。'
             ]
         self.d_text['special'] = [
             '今年も天気予報をよろしくね…',
@@ -206,6 +208,7 @@ class Rin:
 
         self.f_text = self.aisatsu+'\n'+self.tenki+self.kion+'\n'+self.c_text+'\n'+ht
 
+    """
     #文字数の確認
     def length_check(self,show):
         print()
@@ -251,6 +254,7 @@ class Rin:
         print("-"*50)
         print("<< d_textの確認 >>")
         mini_check(48,self.d_text)
+    """
 
 
 
@@ -287,7 +291,15 @@ if __name__ == "__main__":
     print("このモジュールは渋谷凛の天気予報をお伝えします。")
     print("文字数のチェックを実施します。")
     n = input("全てのテキストを見る場合は「1」と打ち込んでください\n>> ")
-    cin.length_check(n)
+    box_list = [
+        cin.goodm_box,
+        cin.goode_box,
+        cin.special,
+        cin.tenki,
+        cin.kion,
+        cin.d_text
+    ]
+    cf.length_check(n,box_list)
     n2= input("ツイートと同じ文章を見るなら「2」と打ち込んでください\n>> ")
     if n2 =="2":
         print(cin.f_text)

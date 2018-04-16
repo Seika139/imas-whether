@@ -1,5 +1,6 @@
 import numpy.random as nmr
 import datetime as dt
+import common_function as cf
 
 class Sachiko:
     def __init__(self,am_pm,japan,prediction,cond,s_data):
@@ -256,7 +257,15 @@ if __name__ == "__main__":
     print("このモジュールは輿水幸子の天気予報をお伝えします。")
     print("文字数のチェックを実施します。")
     n = input("全てのテキストを見る場合は「1」と打ち込んでください\n>> ")
-    cin.length_check(n)
+    box_list = [
+        cin.goodm_box,
+        cin.goode_box,
+        cin.special,
+        cin.tenki,
+        cin.kion,
+        cin.d_text
+    ]
+    cf.length_check(n,box_list)
     n2= input("ツイートと同じ文章を見るなら「2」と打ち込んでください\n>> ")
     if n2 =="2":
         print(cin.f_text)
