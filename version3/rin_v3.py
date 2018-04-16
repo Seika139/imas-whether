@@ -45,21 +45,8 @@ class Rin:
             'メリークリスマス！ふふっ、渋谷凛の天気予報です。'
             ]
 
-        if japan.month==1 and japan.day<=3:
-            self.aisatsu = self.special[0]
-        elif japan.month==2 and japan.day==14:
-            self.aisatsu = self.special[1]
-        elif japan.month==3 and japan.day==3:
-            self.aisatsu = self.special[2]
-        elif japan.month==9 and 3<=japan.day<=5:
-            self.aisatsu = self.special[3]
-        elif japan.month==10 and japan.day==31:
-            self.aisatsu = self.special[4]
-        elif japan.month==11 and 28<=japan.day<=30:
-            self.aisatsu = self.special[5]
-        elif japan.month==12 and 24<=japan.day<=25:
-            self.aisatsu = self.special[6]
-        else:
+        self.aisatsu = cf.special_day(japan,self.special)
+        if self.aisatsu == None:
             if am_pm == 0:
                 num = nmr.randint(len(self.goodm_box))
                 self.aisatsu = self.goodm_box[num]
@@ -73,6 +60,9 @@ class Rin:
         self.kion = "最高気温は{}度、最低気温は{}度の予報です。".format(self.kion_max,self.kion_min)
 
         """ 3. 締め　"""
+        def rbs(x):
+            y = round(abs(x),1)
+            return y
 
         self.d_text = {}
         self.d_text["storm"] = [
@@ -129,9 +119,7 @@ class Rin:
          ""
          )
         """
-        def rbs(x):
-            y = round(abs(x),1)
-            return y
+
 
         if self.kion_min >= 18:
             self.d_text["w_hot_min"] = "{}はここ一週間で最低気温が一番高いんだって。ちょっと暑いかもね".format(date)
@@ -181,24 +169,12 @@ class Rin:
 
 
         if cond[1] == 0:
-            if japan.month==1 and japan.day<=3:
-                self.c_text = self.d_text['special'][0]
-            elif japan.month==2 and japan.day==14:
-                self.c_text = self.d_text['special'][1]
-            elif japan.month==3 and japan.day==3:
-                self.c_text = self.d_text['special'][2]
-            elif japan.month==9 and 3<=japan.day<=5:
-                self.c_text = self.d_text['special'][3]
-            elif japan.month==10 and japan.day==31:
-                self.c_text = self.d_text['special'][4]
-            elif japan.month==11 and 28<=japan.day<=30:
-                self.c_text = self.d_text['special'][5]
-            elif japan.month==12 and 24<=japan.day<=25:
-                self.c_text = self.d_text['special'][6]
-            elif am_pm == 0:
-                self.c_text = self.d_text['nothing_am'][nmr.randint(len(self.d_text['nothing_am']))]
-            else:
-                self.c_text = self.d_text['nothing_pm'][nmr.randint(len(self.d_text['nothing_pm']))]
+            self.c_text = cf.special_day(japan,self.d_text['special'])
+            if self.c_text == None:
+                if am_pm == 0:
+                    self.c_text = self.d_text['nothing_am'][nmr.randint(len(self.d_text['nothing_am']))]
+                else:
+                    self.c_text = self.d_text['nothing_pm'][nmr.randint(len(self.d_text['nothing_pm']))]
         elif type(self.d_text[cond[0]])==list:
             self.c_text = self.d_text[cond[0]][nmr.randint(len(self.d_text[cond[0]]))]
         elif type(self.d_text[cond[0]])==dict:
@@ -207,56 +183,6 @@ class Rin:
             self.c_text = self.d_text[cond[0]]
 
         self.f_text = self.aisatsu+'\n'+self.tenki+self.kion+'\n'+self.c_text+'\n'+ht
-
-    """
-    #文字数の確認
-    def length_check(self,show):
-        print()
-        def show_text(text):
-            if show =="1": print(text)
-        def mini_check(length,box):
-            longest = 0
-            text = ""
-            if type(box)==list:
-                for i in box:
-                    show_text(str(len(i))+': '+i)
-                    if len(i) >= longest:
-                        longest = len(i)
-                        text = i
-            elif type(box)==dict:
-                for i in box:
-                    if type(box[i])==list:
-                        for j in box[i]:
-                            show_text(str(len(j))+': '+j)
-                            if len(j) >= longest:
-                                longest = len(j)
-                                text = j
-                    else:
-                        show_text(str(len(box[i]))+': '+box[i])
-                        if len(box[i]) >= longest:
-                            longest = len(box[i])
-                            text = box[i]
-            if longest > length:
-                print("最長のものが{}文字で規定の長さ{}文字を超えています。".format(longest,length))
-                print("最長の文章は\n",text)
-            else:
-                print("最長のものが{}文字なので規定の長さ{}文字以内を満たしています。".format(longest,length))
-            print("-"*50)
-
-        print("<< goodm_boxの確認 >>")
-        mini_check(33,self.goodm_box)
-        print("<< goode_boxの確認 >>")
-        mini_check(33,self.goode_box)
-        print("<< specialの確認 >>")
-        mini_check(33,self.special)
-        print("<< text2の確認 >>")
-        print(len(self.tenki+self.kion),"words　(45文字以下ならOK)")
-        print("-"*50)
-        print("<< d_textの確認 >>")
-        mini_check(48,self.d_text)
-    """
-
-
 
 if __name__ == "__main__":
 
@@ -291,14 +217,7 @@ if __name__ == "__main__":
     print("このモジュールは渋谷凛の天気予報をお伝えします。")
     print("文字数のチェックを実施します。")
     n = input("全てのテキストを見る場合は「1」と打ち込んでください\n>> ")
-    box_list = [
-        cin.goodm_box,
-        cin.goode_box,
-        cin.special,
-        cin.tenki,
-        cin.kion,
-        cin.d_text
-    ]
+    box_list = [cin.goodm_box,cin.goode_box,cin.special,cin.tenki,cin.kion,cin.d_text]
     cf.length_check(n,box_list)
     n2= input("ツイートと同じ文章を見るなら「2」と打ち込んでください\n>> ")
     if n2 =="2":
