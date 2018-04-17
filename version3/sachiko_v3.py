@@ -17,14 +17,14 @@ class Sachiko:
         self.goodm_box = [
             "ふふーん！ボクの天気予報を見れるなんてあなたは幸せ者ですねぇー",
             "みなさーん、カワイイ幸子による天気予報ですよ！",
-            "え、カワイイボクよりも天気が気になる？しょうがないですねー",
-            "おはようございまーす！輿水幸子の天気予報の時間ですよー"
+            "え、カワイイボクよりも天気が気になる？しょうがないですねぇ",
+            "おはようございまーす！輿水幸子の天気予報の時間ですよ！"
         ]
         self.goode_box = [
-            "ふふーん！ボクの天気予報を見れるなんてあなたは幸せ者ですねぇー",
+            "ふふーん！ボクの天気予報を見れるなんてあなたは幸せ者ですねぇ",
             "みなさーん、カワイイ幸子による天気予報ですよ！",
-            "え、カワイイボクよりも天気が気になる？しょうがないですねー",
-            "こんばんはー！輿水幸子の天気予報の時間ですよー"
+            "え、カワイイボクよりも天気が気になる？しょうがないですねぇ",
+            "こんばんはー！輿水幸子の天気予報の時間ですよ！"
         ]
         self.special =[
             'フフーン！！あけましておめでとうございます！',
@@ -38,12 +38,8 @@ class Sachiko:
 
         self.aisatsu = cf.special_day(japan,self.special)
         if self.aisatsu == None:
-            if am_pm == 0:
-                num = nmr.randint(len(self.goodm_box))
-                self.aisatsu = self.goodm_box[num]
-            else:
-                num = nmr.randint(len(self.goode_box))
-                self.aisatsu = self.goode_box[num]
+            if am_pm == 0: self.aisatsu = cf.rand_sel(self.goodm_box)
+            else: self.aisatsu = cf.rand_sel(self.goode_box)
 
         """ 2. 予報 """
 
@@ -60,9 +56,6 @@ class Sachiko:
         self.kion = "最高気温は{}度、最低気温は{}度の予報です！".format(self.kion_max,self.kion_min)
 
         """ 3. 締め　"""
-        def rbs(x):
-            y = round(abs(x),1)
-            return y
 
         self.d_text = {}
         self.d_text["storm"] = [
@@ -94,27 +87,34 @@ class Sachiko:
         self.d_text["fine"] = "フフーン！{}はカワイイボクに相応しい良い天気になりそうですね！".format(date)
         self.d_text["w_cold_max"] = "{}は最高気温がここ一週間で一番低いようですよ！".format(date)
         self.d_text["w_cold_min"] = "{}はここ最近で一番冷え込むようですよ。暖かい格好で出かけましょう！".format(date)
-        if self.kion_max >= 25:
-            self.d_text["w_hot_max"] = "{}はここ最近で一番の暑さです！熱中症には気をつけましょう！".format(date)
-        else:
-            self.d_text["w_hot_max"] = "{}はここ最近で一番暖かいようです。普段より涼しめな格好でいいかもしれませんね。".format(date)
+        self.d_text['w_hot_max'] = {
+            'term':'kion_max','cases':2,'border':25,
+            0 : "{}はここ最近で一番暖かいようです。普段より涼しめな格好でいいかもしれませんね。".format(date),
+            1 :"{}はここ最近で一番の暑さです！熱中症には気をつけましょう！".format(date)
+            }
         self.d_text["w_hot_min"] = "{}はここ一週間で最低気温がもっとも高くなるようですよ〜".format(date)
-        if self.kion_max >= 25:
-            self.d_text["y_hot_max"]="{}は{}よりも{}度も暑いようですねぇ。暑さに気をつけてくださいね〜".format(date,pre_date,rbs(self.kion_max-s_data[0][0]))
-        else:
-            self.d_text["y_hot_max"] = "{}は{}よりも{}度も暖かいようですねぇ。ふふーん！".format(date,pre_date,rbs(self.kion_max-s_data[0][0]))
-        self.d_text["y_hot_min"] = "{}は{}よりも最低気温が{}度も高いようですねぇ。ふふーん！".format(date,pre_date,rbs(self.kion_min-s_data[1][0]))
-        self.d_text["y_cold_max"] = '{}は{}よりも最高気温が{}度も低くて、とても冷え込みそうですねぇ'.format(date,pre_date,rbs(self.kion_max-s_data[0][0]))
-        self.d_text["y_cold_min"] = '{}は{}よりも最低気温が{}度も低くて、とても冷え込みそうですねぇ'.format(date,pre_date,rbs(self.kion_min-s_data[1][0]))
+        self.d_text['y_hot_max'] = {
+            'term':'kion_max','cases':2,'border':25,
+            0 : "{}は{}よりも{}度も暖かいようですねぇ。ふふーん！".format(date,pre_date,cf.rbs(self.kion_max-s_data[0][0])),
+            1 : "{}は{}よりも{}度も暑いようですねぇ。暑さに気をつけてくださいね〜".format(date,pre_date,cf.rbs(self.kion_max-s_data[0][0]))
+            }
+        self.d_text["y_hot_min"] = "{}は{}よりも最低気温が{}度も高いようですねぇ。ふふーん！".format(date,pre_date,cf.rbs(self.kion_min-s_data[1][0]))
+        self.d_text["y_cold_max"] = '{}は{}よりも最高気温が{}度も低くて、とても冷え込みそうですねぇ'.format(date,pre_date,cf.rbs(self.kion_max-s_data[0][0]))
+        self.d_text["y_cold_min"] = '{}は{}よりも最低気温が{}度も低くて、とても冷え込みそうですねぇ'.format(date,pre_date,cf.rbs(self.kion_min-s_data[1][0]))
+        self.d_text['w_over30'] = '最近暑いので涼しいものが欲しくて…あ、ホラーはいいです！遠慮しときます…'
+        self.d_text['w_under0'] = 'ふふーん！最近寒いからって、ずっとコタツの中にいたらダメですよー'
         #雪が降る＆積雪が十分にある
-        self.d_text["snow_1-10"] = "{}はさらに雪が積もりそうですよ！ふふーん！".format(date)
+        self.d_text["snow_1-10"] = "{}はさらに雪が積もりそうでねえ。スキーの練習をしましょう。".format(date)
         #雪が降る＆まあまあの積雪
         self.d_text["snow_1-1"] = "{}はさらに雪が積もりそうですよ！ふふーん！".format(date)
         #雪が降る＆積雪なし
-        self.d_text["snow_1-0"] = "別にボクは雪が降ったぐらいじゃしゃぎませんよ。ふーんだ！"
+        self.d_text["snow_1-0"] = "別にボクは雪が降ったぐらいじゃしゃぎませんよ。フフーン！"
         #雪が降らん＆積雪が十分にある
-        if am_pm == 0: self.d_text["snow_0-10"] = "現在の積雪は{}cmですよ。雪用の靴を履きましょう！".format(s_data[3][0])
-        else: self.d_text["snow_0-10"] = "雪が積もっているので雪用の靴を履きましょう！"
+        self.d_text["snow_0-10"] = {
+            'term':'am_pm','cases':2,'border':1,
+            0 : "現在の積雪は{}cmですよ。雪用の靴を履きましょう！".format(s_data[3][0]),
+            1 : "雪が積もっているので雪用の靴を履きましょう！"
+            }
         #雪が降らん＆少しの積雪
         self.d_text["snow_0-1"] = "まだまだ雪は解けてませんよ。滑って転ばないでくださいね！"
 
@@ -141,14 +141,17 @@ class Sachiko:
         if cond[1] == 0:
             self.c_text = cf.special_day(japan,self.d_text['special'])
             if self.c_text == None:
-                if am_pm == 0:
-                    self.c_text = self.d_text['nothing_am'][nmr.randint(len(self.d_text['nothing_am']))]
-                else:
-                    self.c_text = self.d_text['nothing_pm'][nmr.randint(len(self.d_text['nothing_pm']))]
-        elif type(self.d_text[cond[0]])==list:
-            self.c_text = self.d_text[cond[0]][nmr.randint(len(self.d_text[cond[0]]))]
-        else:
-            self.c_text = self.d_text[cond[0]]
+                if am_pm == 0: self.c_text = cf.rand_sel(self.d_text['nothing_am'])
+                else: self.c_text = cf.rand_sel(self.d_text['nothing_pm'])
+        elif type(self.d_text[cond[0]])==list: self.c_text = cf.rand_sel(self.d_text[cond[0]])
+        elif type(self.d_text[cond[0]])==dict:
+            x = self.d_text[cond[0]]
+            if x['term'] == 'kion_max': elemnt = self.kion_max
+            elif x['term'] == 'kion_min': elemnt = self.kion_min
+            elif x['term'] == 'am_pm': elemnt = am_pm
+            if elemnt >= x['border']: self.c_text = x[1]
+            else: self.c_text = x[0]
+        else: self.c_text = self.d_text[cond[0]]
 
         self.f_text = self.aisatsu+'\n'+self.tenki+self.kion+'\n'+self.c_text+'\n'+ht
 
@@ -165,7 +168,7 @@ if __name__ == "__main__":
     import gt_v3
     gt = gt_v3.Get_tenki("http://www.drk7.jp/weather/xml/13.xml",'東京地方',"東京")
     data_base = []
-    for j in range(10):
+    for j in range(7):
         previous = japan - dt.timedelta(days=j+1-am_pm)
         rcd = rc.Recorder("東京",previous)
         rcd.get_info()

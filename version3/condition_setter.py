@@ -9,6 +9,7 @@ class Setter:
 
     def __init__(self,am_pm,data,prediction):
         self.place = prediction[0]
+        self.day = prediction[1]
         self.weather = prediction[2]
         self.weather_id = prediction[3]
         self.kion_max = prediction[4][0]
@@ -79,13 +80,12 @@ class Setter:
         "y_hot_min" : 0,#昨日より最低気温がとても高い
         "y_cold_max" : 0,#昨日より最高気温がとても低い
         "y_cold_min" : 0,#昨日より最低気温がとても低い
+        'w_over30' : 0,#30度以上の日が続く
+        'w_under0' : 0 #0度以下の日が続く
         }
 
         ## 予報のみで判断できるもの
 
-        #降雪
-        if "雪" in self.weather and "雨か雪" not in self.weather:
-            self.cond_dic["雪"] = 60
         #嵐
         if "307" in self.weather_id or "308" in self.weather_id:
             self.cond_dic["storm"] = 100
@@ -110,7 +110,7 @@ class Setter:
             self.cond_dic["under10"] = 20
         #気温が30度以上
         if int(self.kion_max) >= 30:
-            self.cond_dic["over30"] = 25
+            self.cond_dic["over30"] = 35
         #熱帯夜　最低気温が25度以上
         if int(self.kion_min) >= 25:
             self.cond_dic["over25"] = 30
@@ -193,6 +193,11 @@ class Setter:
         elif min_dis_d <= -8:
             self.cond_dic["y_cold_min"] = 40
 
+        if min(float(self.kion_max),min(kion_max_array[:3])) >= 30:
+            self.cond_dic['w_over30'] = 50
+        if max(float(self.kion_min),max(kion_min_array[:3])) <= 0:
+            self.cond_dic['w_under0'] = 50
+
         ## データが必要で朝の天気でしか使えない
         """
         << 雪 >>
@@ -255,7 +260,19 @@ class Setter:
         num = nmr.randint(len(cond_select))
         self.cond_key = [cond_select[num],cond_max] #[str,int]
 
+    def open_info(self,data):
+        def printer(day,weather,max,min):
+            print("日付　　",day)
+            print("天気　　",weather)
+            print("最高気温",max)
+            print("最低気温",min)
+            print("="*50)
 
+        print("場所　　",self.place)
+        print()
+        printer(self.day,self.weather,self.kion_max,self.kion_min)
+        for i in data:
+            printer(i["day"],i["天気概況"]["昼"],i["気温"]["最高"],i["気温"]["最低"])
 
 if __name__ == "__main__":
     import recorder as rc
@@ -270,7 +287,7 @@ if __name__ == "__main__":
     gt = gt_v3.Get_tenki("http://www.drk7.jp/weather/xml/13.xml",'東京地方',"東京")
 
     data_base = []
-    for j in range(10):
+    for j in range(7):
         previous = japan - dt.timedelta(days=j+1-am_pm)
         rcd = rc.Recorder("東京",previous)
         rcd.get_info()
@@ -286,6 +303,7 @@ if __name__ == "__main__":
 
     setter = Setter(am_pm,data_base,gt.gt_box_array[am_pm])
 
+
     for i in data_base:
         print(i)
         print("-"*50)
@@ -294,3 +312,7 @@ if __name__ == "__main__":
         print(i,setter.cond_dic[i])
     print("#"*55)
     print(gt.gt_box_array[am_pm])
+
+    nm= input("input 1\n>> ")
+    if nm=="1":
+        setter.open_info(data_base)

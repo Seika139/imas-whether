@@ -3,11 +3,13 @@ def show_text(show,text):
     if show =="1": print(text)
 
 def mini_check(show,length,box):
-    def omit(a,i):
-        y = str(len(a))+' '*3+i+' '*abs(12-len(i))+': '+a
+    def omit(a,i,store):
+        if i != store: y = str(len(a))+' '*3+i+' '*abs(12-len(i))+': '+a
+        else: y = str(len(a))  + ' '*15+': '+a
         return y
     longest = 0
     text = ""
+    store = ''
     if type(box)==list:
         for i in box:
             show_text(show,str(len(i))+': '+i)
@@ -18,19 +20,22 @@ def mini_check(show,length,box):
         for i in box:
             if type(box[i])==list:
                 for j in box[i]:
-                    show_text(show,omit(j,i))
+                    show_text(show,omit(j,i,store))
+                    store = i
                     if len(j) >= longest:
                         longest = len(j)
                         text = j
             elif type(box[i])==dict:
                 for key in box[i]:
                     if type(key)==int:
-                        show_text(show,omit(box[i][key],i))
+                        show_text(show,omit(box[i][key],i,store))
+                        store = i
                         if len(box[i][key]) >= longest:
                             longest = len(box[i][key])
                             text = box[i][key]
             else:
-                show_text(show,omit(box[i],i))
+                show_text(show,omit(box[i],i,store))
+                store = i
                 if len(box[i]) >= longest:
                     longest = len(box[i])
                     text = box[i]
@@ -57,6 +62,7 @@ def length_check(show,box_list):
     print("<< d_textの確認 >>")
     mini_check(show,48,box_list[5])
 
+#特別な日の判別に関わる関数
 def special_day(japan,box):
     if japan.month==1 and japan.day<=3:
         ans = box[0]
@@ -75,3 +81,12 @@ def special_day(japan,box):
     else:
         ans = None
     return ans
+
+#文字数の省略
+def rbs(x):
+    y = round(abs(x),1)
+    return y
+
+import numpy.random as nmr
+def rand_sel(a):
+    return a[nmr.randint(len(a))]
