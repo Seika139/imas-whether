@@ -41,7 +41,7 @@ class Anzu:
         if self.place == "仙台": self.d_text["nothing4"] = "次は東京の天気予報だよー。"
         elif self.place == "東京": self.d_text["nothing4"] = "次は大阪の天気予報だよー。"
         elif self.place == "大阪": self.d_text["nothing4"] = "次は福岡の天気予報だよー。"
-        elif self.place == "福岡": self.d_text["nothing4"] = "以上、あんずによる{}の天気予報でした！".format(self.x_date)
+        elif self.place == "福岡": self.d_text["nothing4"] = "以上、杏による{}の天気予報でした！".format(self.x_date)
         self.d_text["snow"] = "雪が降るんならお家でぬくぬく過ごしたいなぁ〜"
         self.d_text["fine"] = "{}はとってもいい天気！お昼寝日和だぁ〜".format(self.x_date)
         self.d_text["storm"] = "{}は雨も風も強いし、仕事なんかしてる場合じゃない！杏を帰らせろー！".format(self.x_date)

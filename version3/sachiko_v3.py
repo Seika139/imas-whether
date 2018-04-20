@@ -12,6 +12,15 @@ class Sachiko:
         self.kion_min = int(prediction[4][1])
         self.rain = prediction[6]
 
+        if am_pm == 0:
+            date = "今日"
+            pre_date = "昨日"
+            ht = "#デレマス朝の天気予報"
+        else:
+            date = "明日"
+            pre_date = "今日"
+            ht = "#デレマス夜の天気予報"
+            
         """ 1. 挨拶 """
 
         self.goodm_box = [
@@ -31,7 +40,7 @@ class Sachiko:
             'ハッピーバレンタイン！輿水幸子の天気予報ですよー',
             'ふふーん！今日は女の子の祭典、ひな祭りですよ！',
             'ふふーん！デレステ配信{}周年ですよ♪'.format(japan.year-2015),
-            'ハッピーハロウィン！今日の気予報の時間ですよー',
+            'ハッピーハロウィン！{}の天気予報の時間ですよー'.format(date),
             'ふふーん！モバマス配信{}周年ですよ！'.format(japan.year-2011),
             'メリークリスマス！輿水幸子の天気予報ですよ！'
             ]
@@ -42,15 +51,6 @@ class Sachiko:
             else: self.aisatsu = cf.rand_sel(self.goode_box)
 
         """ 2. 予報 """
-
-        if am_pm == 0:
-            date = "今日"
-            pre_date = "昨日"
-            ht = "#デレマス朝の天気予報"
-        else:
-            date = "明日"
-            pre_date = "今日"
-            ht = "#デレマス夜の天気予報"
 
         self.tenki = "{}の{}の天気は「{}」、".format(date,self.place,self.weather)
         self.kion = "最高気温は{}度、最低気温は{}度の予報です！".format(self.kion_max,self.kion_min)
@@ -81,8 +81,17 @@ class Sachiko:
             '暑くて外に出られないなんて、だらしないですよ。ほらほら♪'
             ]
         self.d_text["over25"] = [
-            '暑くて眠れない夜はボクを数えてください！ほら、カワイイ幸子が１人、カワイイ幸子が２人...',
+            '暑くて眠れない夜はボクを数えてください！ほら、カワイイ幸子が１人、カワイイ幸子が２人…',
             '水分をきちんと摂って寝るのがカワイさの秘訣ですよ♪'
+            ]
+        self.d_text['w_over30'] = [
+            '最近暑いので涼しいものが欲しくて…あ、ホラーはいいです！遠慮しときます…',
+            '今度水泳のテストがあるので練習です。え？、念のためですよ！',
+            '{}も暑いみたいですねぇ。水を多めに飲みましょう'.format(date)
+            ]
+        self.d_text['w_under0'] = [
+            'ふふーん！最近寒いからって、ずっとコタツの中にいたらダメですよー',
+            '最近は寒いですねぇ。風邪をひかないように手洗いうがいです！'
             ]
         self.d_text["fine"] = "フフーン！{}はカワイイボクに相応しい良い天気になりそうですね！".format(date)
         self.d_text["w_cold_max"] = "{}は最高気温がここ一週間で一番低いようですよ！".format(date)
@@ -101,8 +110,6 @@ class Sachiko:
         self.d_text["y_hot_min"] = "{}は{}よりも最低気温が{}度も高いようですねぇ。ふふーん！".format(date,pre_date,cf.rbs(self.kion_min-s_data[1][0]))
         self.d_text["y_cold_max"] = '{}は{}よりも最高気温が{}度も低くて、とても冷え込みそうですねぇ'.format(date,pre_date,cf.rbs(self.kion_max-s_data[0][0]))
         self.d_text["y_cold_min"] = '{}は{}よりも最低気温が{}度も低くて、とても冷え込みそうですねぇ'.format(date,pre_date,cf.rbs(self.kion_min-s_data[1][0]))
-        self.d_text['w_over30'] = '最近暑いので涼しいものが欲しくて…あ、ホラーはいいです！遠慮しときます…'
-        self.d_text['w_under0'] = 'ふふーん！最近寒いからって、ずっとコタツの中にいたらダメですよー'
         #雪が降る＆積雪が十分にある
         self.d_text["snow_1-10"] = "{}はさらに雪が積もりそうでねえ。スキーの練習をしましょう。".format(date)
         #雪が降る＆まあまあの積雪

@@ -60,7 +60,7 @@ class Udsuki:
             "{}は強い雨と風が吹き荒れるようです。出かける際は十分に気をつけてくださいね！".format(date),
             "ううっ、嵐が来るみたいですけど、大丈夫でしょうか？"
             ]
-        self.d_text["rain_123"] = "{}は1日を通じて降水確率が{}％を越えそうです。出かけるときは傘を忘れずに持っていきましょう。".format(date,min(self.rain[1:]))
+        self.d_text["rain_123"] = "{}は1日を通じて降水確率が{}％を越えそうです。傘を忘れずに持っていきましょう。".format(date,min(self.rain[1:]))
         self.d_text["rain_12"] = "{}は午前中の降水確率が{}％、午後は{}％となる見込みです。雨具があるといいでしょう。".format(date,self.rain[1],self.rain[2])
         self.d_text["rain_23"] = "{}は午後の降水確率が{}％、夜は{}％となっています。傘を持っていくといいでしょう。".format(date,self.rain[2],self.rain[3])
         self.d_text["rain_3"] = "{}は夜の降水確率が{}％となっています。帰りが遅い人は傘を持っていくといいでしょう。".format(date,self.rain[3])
@@ -75,13 +75,23 @@ class Udsuki:
             '私、寒いと指先が冷えちゃって・・えへへ'
             ]
         self.d_text["over30"] = [
-            'またみんなで海に行きたいですね！あ、でも水着を買わないと・・',
+            'またみんなで海に行きたいですね！あ、でも新しい水着を買わないと…',
             '暑いので熱中症には気をつけてくださいね!',
             'どうしよう。スクール水着しか今着れる水着がないんですぅ〜'
             ]
         self.d_text["over25"] = [
             '最近アイスクリームを毎日食べちゃってて・・えへへ',
-            '夜も25度を下回らないことを「熱帯夜」っていうんですよ。ご存知でしたか？'
+            '夜も25度を下回らないことを「熱帯夜」っていうんですよ。知ってましたか？'
+            ]
+        self.d_text['w_over30'] = [
+            '最近ずっと暑いので、熱中症には気をつけましょう。',
+            '{}も暑そうですね。ちゃんと水分を取りましょう！'.format(date),
+            '{}も暑いですね！日焼け対策は大丈夫ですか？'.format(date)
+            ]
+        self.d_text['w_under0'] = [
+            '最近は本当に寒くて…寝るときは湯たんぽを使うんですよ、私！',
+            'こんなに寒いと凍えちゃいますぅ。今日は手袋忘れちゃって…',
+            '昨日は鍋だったんですよ。やっぱり温かいものがこの時期はいいですね！'
             ]
         self.d_text["fine"] = "{}はよく晴れたいい天気になりそうで、私も頑張れそうです！皆さんも良い1日を〜♪".format(date)
         self.d_text["w_cold_max"] = "{}は最高気温がここ一週間で一番低いようです。体調管理には気をつけてくださいね".format(date)
@@ -100,8 +110,6 @@ class Udsuki:
         self.d_text["y_hot_min"] = "{}は{}よりも最低気温が{}度も高いようですよ。".format(date,pre_date,cf.rbs(self.kion_min-s_data[1][0]))
         self.d_text["y_cold_max"] = '{}は{}よりも最高気温が{}度も低くて、とても冷え込みそうです'.format(date,pre_date,cf.rbs(self.kion_max-s_data[0][0]))
         self.d_text["y_cold_min"] = '{}は{}よりも最低気温が{}度も低くて、とても冷え込みそうです'.format(date,pre_date,cf.rbs(self.kion_min-s_data[1][0]))
-        self.d_text['w_over30'] = '最近ずっと暑いので、熱中症には気をつけましょう。'
-        self.d_text['w_under0'] = '最近は本当に寒くて…寝るときは湯たんぽを使うんですよ、私！'
         #雪が降る＆積雪が十分にある
         self.d_text['snow_1-10'] = {
             'term':'am_pm','cases':2,'border':1,
@@ -129,10 +137,11 @@ class Udsuki:
             'それでは、今日も１日頑張っていきましょう！',
             '島村卯月、今日も１日頑張ります！',
             '夜の天気予報もチェックしてくださいね。'
+            '昨日も友達と長電話しちゃって…ちょっと眠いですぅ'
             ]
         self.d_text['nothing_pm']= [
             'それでは、明日も頑張っていきましょう！',
-            '今日も１日お疲れ様でした！',
+            '今日も１日お疲れ様です。私、レッスン頑張っちゃいました！',
             '明日の天気予報もチェックしてくださいね。'
             ]
         self.d_text['special'] = [
@@ -140,16 +149,30 @@ class Udsuki:
             'ああ、あの…、チョコ受け取ってくれません…か？',
             '雛あられ食べますか？えへへ…',
             'これからもデレステをよろしくお願いします。',
-            'トリックオアトリートですよ！お菓子をください！',
+            'トリックオアトリートですよ！お菓子、もらえますか？',
             '今後もモバマスをプレイしてくださいね！',
-            '今年はサンタさんに何をもらえるのかなぁ。'
+            '今年はサンタさんに何をもらえるのかなぁ。ドキドキしちゃいますね！'
+            ]
+        self.d_text['hanami'] = [
+            'お花見しようよ　ハイッ！　♪\nお花見、行ってきちゃいました！',
+            '私もキラキラしたいです！満開の桜みたいに♪',
+            '今度のお花見は事務所のみんなで行きましょう！'
             ]
 
         if cond[1] == 0:
             self.c_text = cf.special_day(japan,self.d_text['special'])
             if self.c_text == None:
-                if am_pm == 0: self.c_text = cf.rand_sel(self.d_text['nothing_am'])
+                if japan.month == 4 and japan.day <= 10:
+                    self.c_text = cf.rand_sel(self.d_text['hanami'])
+                elif japan.month == 3 and japan.day >= 25:
+                    self.c_text = cf.rand_sel(self.d_text['hanami'])
+                elif am_pm == 0: self.c_text = cf.rand_sel(self.d_text['nothing_am'])
                 else: self.c_text = cf.rand_sel(self.d_text['nothing_pm'])
+        elif cond[1] == 10:
+            if japan.month == 4 and japan.day <= 10:
+                self.c_text = cf.rand_sel(self.d_text['hanami'])
+            elif japan.month == 3 and japan.day >= 25:
+                self.c_text = cf.rand_sel(self.d_text['hanami'])
         elif type(self.d_text[cond[0]])==list: self.c_text = cf.rand_sel(self.d_text[cond[0]])
         elif type(self.d_text[cond[0]])==dict:
             x = self.d_text[cond[0]]

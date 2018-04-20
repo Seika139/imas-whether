@@ -29,7 +29,7 @@ class Mio:
         self.d_text["snow"] = "{}は雪が降る予報だって！積もったら雪合戦したいなっ☆".format(self.x_date)
         self.d_text["fine"] = "{}は晴れていい天気になりそうだよ！なんだかいいことが起こりそうー！".format(self.x_date)
         self.d_text["storm"] = "{}は暴風雨だけど、雨にも負けず！がんばろー！".format(self.x_date)
-        self.d_text["r_123"] = "{}は1日を通じて降水確率が{}％を越えそうだから、出かけるときは傘を忘れずにね！".format(self.x_date,min(self.rain[1],self.rain[2],self.rain[3]))
+        self.d_text["r_123"] = "{}は1日を通じて降水確率が{}％を越えそうだから、出かけるときは傘を忘れずにね！".format(self.x_date,min(self.rain[1:]))
         self.d_text["r_12"] = "{}は午前中の降水確率が{}％、午後は{}％となる見込みだよっ。傘を忘れずに持っていってね！".format(self.x_date,self.rain[1],self.rain[2])
         self.d_text["r_23"] = "{}は午後の降水確率が{}％、夜は{}％だから、朝降ってなくても傘を持っていこう！".format(self.x_date,self.rain[2],self.rain[3])
         self.d_text["r_3"] = "{}は夜の降水確率が{}％だよ。夕方から雨が降るかもだねっ。帰りが遅い人は傘を忘れずにー。".format(self.x_date,self.rain[3])

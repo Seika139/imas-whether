@@ -14,3 +14,8 @@ print(len(text)-1, "words")
 a = {"QWER":13,"QWERT":1234}
 for i in a:
     print(i,a[i])
+
+for i in [text1,text2,text3,text4]:
+    if "天気予報" in i or "くもり" in i:
+        print("!!")
+    else: print("asdf")

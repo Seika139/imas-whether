@@ -48,19 +48,22 @@ def mini_check(show,length,box):
         print("{}最長のものが{}文字なので規定の長さ{}文字以内を満たしています。".format(atn,longest,length))
     print("-"*50)
 
-def length_check(show,box_list):
-    print()
-    print("<< goodm_boxの確認 >>")
-    mini_check(show,33,box_list[0])
-    print("<< goode_boxの確認 >>")
-    mini_check(show,33,box_list[1])
-    print("<< specialの確認 >>")
-    mini_check(show,33,box_list[2])
-    print("<< text2の確認 >>")
-    print(len(box_list[3]+box_list[4]),"words　(45文字以下ならOK)")
-    print("-"*50)
-    print("<< d_textの確認 >>")
-    mini_check(show,48,box_list[5])
+def length_check(show,box_list,tx1=33,tx3=48):
+    if tx1+tx3==81:
+        print()
+        print("<< goodm_boxの確認 >>")
+        mini_check(show,tx1,box_list[0])
+        print("<< goode_boxの確認 >>")
+        mini_check(show,tx1,box_list[1])
+        print("<< specialの確認 >>")
+        mini_check(show,tx1,box_list[2])
+        print("<< text2の確認 >>")
+        print(len(box_list[3]+box_list[4]),"words　(45文字以下ならOK)")
+        print("-"*50)
+        print("<< d_textの確認 >>")
+        mini_check(show,tx3,box_list[5])
+    else: print("\n引数tx1とtx3の合計が81になるようにしてください\n")
+
 
 #特別な日の判別に関わる関数
 def special_day(japan,box):
@@ -84,7 +87,7 @@ def special_day(japan,box):
 
 #文字数の省略
 def rbs(x):
-    y = round(abs(x),1)
+    y = round(abs(x))
     return y
 
 import numpy.random as nmr

@@ -46,7 +46,7 @@ class Anastasia:
         self.d_text["snow"] = "スニェーク…。雪は冷たいけど、心は温まりますね。"
         self.d_text["fine"] = "{}は気持ちのよい日、になりそうです。".format(self.x_date)
         self.d_text["storm"] = "雨も風も強いです。ロシアのミチェーリ…吹雪みたいです。気をつけてくださいね。"
-        self.d_text["r_123"] = "{}は一日中降水確率が{}％を越えますね。ゾーンチク…傘を持っていきましょう。".format(self.x_date,min(self.rain[1],self.rain[2],self.rain[3]))
+        self.d_text["r_123"] = "{}は一日中降水確率が{}％を越えますね。ゾーンチク…傘を持っていきましょう。".format(self.x_date,min(self.rain[1:]))
         self.d_text["r_12"] =  "午前中の降水確率が{}％、午後は{}％です。ゾーンチク…傘を持って出かけましょう。".format(self.rain[1],self.rain[2])
         self.d_text["r_23"] = "午後の降水確率が{}％、夜は{}％です。ゾーンチク…傘を持って出かけましょう。".format(self.rain[2],self.rain[3])
         self.d_text["r_3"] = "{}は夜の降水確率が{}％。夕方から雨が降りそうですよ。".format(self.x_date,self.rain[3])
