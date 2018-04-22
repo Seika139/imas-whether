@@ -128,22 +128,25 @@ for i in range(4):
         import miku_v3
         miku = miku_v3.Miku(am_pm,japan,gt.gt_box_array[am_pm],setter.cond_key,setter.s_data)
         tweeting_text = miku.f_text
-        if "魚" in tweeting_text:
-            idl_photo = "miku041.jpg"
-        else:
-            p_num = nmr.randint(1,38)
-            idl_photo = 'miku0{}.jpg'.format(p_num)
+        if "魚" in tweeting_text: idl_photo = "miku0{}.jpg".format(nmr.randint(38,40))
+        elif '水着' in tweeting_text: idl_photo = 'miku0{}.jpg'.format(nmr.randint(32,34))
+        elif japan.month==2 and japan.day==14: idl_photo = 'miku020.jpg'
+        elif japan.month==12 and 24<=japan.day<=25: idl_photo = 'miku015.jpg'
+        else: idl_photo = 'miku0{}.jpg'.format(nmr.randint(1,40))
 
     elif idl_num == 7:
         import yoshino_v3
         yoshino = yoshino_v3.Yoshino(am_pm,japan,gt.gt_box_array[am_pm],setter.cond_key,setter.s_data)
         tweeting_text = yoshino.f_text
-        if "桜" or "紗枝" in tweeting_text:
-            p_num = nmr.randint(1,3)
-            idl_photo = 'yoshino3{}.jpg'.format(p_num)
-        else:
-            p_num = nmr.randint(1,25)
-            idl_photo = 'yoshino{}.jpg'.format(p_num)
+        if japan.month==1 and japan.day<=3: idl_photo='yoshino{}.jpg'.format(nmr.randint(12,14))
+        elif '温泉' in tweeting_text or '湯' in tweeting_text: idl_photo='yoshino{}.jpg'.format(nmr.randint(19,21))
+        elif 'もみじ' in tweeting_text: idl_photo='yoshino{}.jpg'.format(nmr.randint(17,23))
+        elif '紅葉' in tweeting_text: idl_photo='yoshino{}.jpg'.format(nmr.randint(17,23))
+        elif '木の葉は色づい' in tweeting_text: idl_photo='yoshino{}.jpg'.format(nmr.randint(17,23))
+        elif 'かき氷' in tweeting_text: idl_photo = 'yoshino16.jpg'
+        elif 'みそぎ' in tweeting_text: idl_photo = 'yoshino14.jpg'
+        if "桜" in tweeting_text or "紗枝" in tweeting_text: idl_photo = 'yoshino{}.jpg'.format(nmr.randint(23,27))
+        else: idl_photo = 'yoshino{}.jpg'.format(nmr.randint(1,27))
 
     elif idl_num == 8:
         import arisu_v3

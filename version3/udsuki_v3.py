@@ -28,9 +28,9 @@ class Udsuki:
             'あけましておめでとうございます。今年もよろしくお願いします！',
             'ハッピーバレンタイン！島村卯月の天気予報ですよー',
             'あかりをつけましょ　ぼんぼりに～♪\n今日はひな祭りですね',
-            'デレステ配信{}周年、おめでとうございます！天気予報の時間です！'.format(japan.year-2015),
+            'デレステ配信{}周年、おめでとうございます！{}の天気予報の時間です！'.format(japan.year-2015,date),
             'ハッピーハロウィン！天気予報の時間ですよー',
-            'モバマス配信{}周年、おめでとうございます！天気予報の時間ですよ'.format(japan.year-2011),
+            'モバマス配信{}周年、おめでとうございます！{}の天気予報の時間ですよ'.format(japan.year-2011,date),
             'メリークリスマス！島村卯月の天気予報ですよー'
             ]
 
@@ -168,11 +168,10 @@ class Udsuki:
                     self.c_text = cf.rand_sel(self.d_text['hanami'])
                 elif am_pm == 0: self.c_text = cf.rand_sel(self.d_text['nothing_am'])
                 else: self.c_text = cf.rand_sel(self.d_text['nothing_pm'])
-        elif cond[1] == 10:
-            if japan.month == 4 and japan.day <= 10:
-                self.c_text = cf.rand_sel(self.d_text['hanami'])
-            elif japan.month == 3 and japan.day >= 25:
-                self.c_text = cf.rand_sel(self.d_text['hanami'])
+        elif cond[1] == 10 and japan.month == 4 and japan.day <= 10:
+            self.c_text = cf.rand_sel(self.d_text['hanami'])
+        elif cond[1] == 10 and japan.month == 3 and japan.day >= 25:
+            self.c_text = cf.rand_sel(self.d_text['hanami'])
         elif type(self.d_text[cond[0]])==list: self.c_text = cf.rand_sel(self.d_text[cond[0]])
         elif type(self.d_text[cond[0]])==dict:
             x = self.d_text[cond[0]]

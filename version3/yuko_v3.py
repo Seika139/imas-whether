@@ -29,7 +29,7 @@ class Yuko:
         self.goodm_box = [
             "おはようございます！エスパーユッコこと、堀裕子の天気予報の時間です！",
             "むむむーんっ、今からユッコのさいきっくぱわーで天気を予知しちゃいますよ！",
-            'さいきっく〜未来予知っ！明日の天気を予知しちゃいます！'
+            'さいきっく〜未来予知っ！今日の天気を予知しちゃいます！'
             ]
         self.goode_box = [
             "さあ、ユッコのサイキック天気予報の時間ですよ。むんっ！",
@@ -109,10 +109,10 @@ class Yuko:
         self.d_text["w_hot_min"] = "{}はここ一週間で最低気温が一番高いですよ。いつもより涼しい服がいいですよっ".format(date)
         self.d_text['y_hot_max'] = {
             'term':'kion_max','cases':2,'border':25,
-            0 : "{}は{}よりも{}度も暖かくなります。いつもより薄着にしましょう".format(date,pre_date,cf.rbs(self.kion_max-s_data[0][0])),
-            1 : "{}は{}よりも{}度も暑いです。急な暑さに注意してくださいね".format(date,pre_date,cf.rbs(self.kion_max-s_data[0][0]))
+            0 : "{}は{}より{}度も暖かくなります。いつもより薄着にしましょう".format(date,pre_date,cf.rbs(self.kion_max-s_data[0][0])),
+            1 : "{}は{}より{}度も暑いです。急な暑さに注意してくださいね".format(date,pre_date,cf.rbs(self.kion_max-s_data[0][0]))
             }
-        self.d_text["y_hot_min"] = "{}は{}よりも最低気温が{}度も高いですっ。昨日より薄着がいいでしょうっ".format(date,pre_date,cf.rbs(self.kion_min-s_data[1][0]))
+        self.d_text["y_hot_min"] = "{}は{}よりも最低気温が{}度も高いので、{}より薄着がいいでしょう".format(date,pre_date,cf.rbs(self.kion_min-s_data[1][0]),pre_date)
         self.d_text["y_cold_max"] = '{}は{}よりも最高気温が{}度も低いですっ。急に寒さに驚いちゃうかも〜'.format(date,pre_date,cf.rbs(self.kion_max-s_data[0][0]))
         self.d_text["y_cold_min"] = '{}は{}よりも最低気温が{}度も低いですっ。急に寒さに驚いちゃうかも〜'.format(date,pre_date,cf.rbs(self.kion_min-s_data[1][0]))
         #雪が降る＆積雪が十分にある
@@ -153,7 +153,7 @@ class Yuko:
             'このチョコは私の念を込めて作った特別なチョコなんですよっ',
             'ひな祭りは女の子の健やかな成長を願うお祭り…私のサイキックパワーももっと強く！',
             'デレステ{}周年目指して、もっとサイキックパワーを磨きます！'.format(japan.year-2014),
-            'ハロウィン…、日本の盛り上がりがすごくて、アーニャびっくりしました。',
+            'ハロウィンだからってイタズラしすぎはギルティですよっ！',
             'モバマス{}周年に向けて、もっと頑張ります！'.format(japan.year-2010),
             'クリスマスプレゼントは…特製のスプーンセットをぜひっ！'
             ]
