@@ -58,7 +58,7 @@ class Momoka:
         self.d_text["snow2"] =  "雪で滑ってしまわないよう注意ですわ！私なら大丈夫ですの。"
         self.d_text["fine"] = "{}はいい天気になるようですの。お庭でローズヒップティーを嗜むのもいいですわね♪".format(self.x_date)
         self.d_text["storm"] = "{}は荒れた天気になるようですの。不要な外出はお控えくださいまし。".format(self.x_date)
-        self.d_text["r_123"] = "{}は１日を通して降水確率が{}％を越えるようですの。傘を忘れずにお出かけなさいませ。".format(self.x_date,min(self.rain[1],self.rain[2],self.rain[3]))
+        self.d_text["r_123"] = "{}は１日を通して降水確率が{}％を越えるようですの。傘を忘れずにお出かけなさいませ。".format(self.x_date,min(self.rain[1:]))
         self.d_text["r_12"] = "午前中の降水確率が{}％、午後は{}％ですの。外出時には、傘を持って行ってくださいな。".format(self.rain[1],self.rain[2])
         self.d_text["r_23"] = "午後の降水確率が{}％、夜は{}％ですの。雨が降ってなくても傘を持っていってくださいな。".format(self.rain[2],self.rain[3])
         self.d_text["r_3"] = "{}は夜の降水確率が{}％ですわ。遅くまで外出する人は傘を持っていきなさいませ。".format(self.x_date,self.rain[3])

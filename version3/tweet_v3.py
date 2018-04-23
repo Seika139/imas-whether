@@ -163,15 +163,16 @@ for i in range(4):
         import momoka_v3
         momoka = momoka_v3.Momoka(am_pm,japan,gt.gt_box_array[am_pm],setter.cond_key,setter.s_data)
         tweeting_text = momoka.f_text
-        if "夜更かし" in tweeting_text:
-            p_num = nmr.randint(1,3)
-            idl_photo = 'momoka_yofukashi{}.jpg'.format(p_num)
-        elif "紅茶" or "ローズヒップティー" in tweeting_text:
-            p_num = nmr.randint(1,3)
-            idl_photo = 'momoka_tea{}.jpg'.format(p_num)
-        else:
-            p_num = nmr.randint(1,31)
-            idl_photo = 'momoka{}.jpg'.format(p_num)
+        if 'シャボン玉' in tweeting_text: idl_photo='momoka26.jpg'
+        elif 'お花見' in tweeting_text or 'パリラ' in tweeting_text: idl_photo='momoka35.jpg'
+        elif 'まゆさん' in tweeting_text or '杏さん' in tweeting_text: idl_photo='momoka36.jpg'
+        elif "夜更かし" in tweeting_text: idl_photo = 'momoka{}.jpg'.format(nmr.randint(33,35))
+        elif '仁奈' in tweeting_text: idl_photo='momoka15.jpg'
+        elif '線香花火' in tweeting_text: idl_photo='momoka20.jpg'
+        elif japan.month==2 and japan.day==14: idl_photo='momoka5.jpg'
+        elif japan.month==6 and japan.day==2: idl_photo='momoka{}.jpg'.format(nmr.randint(8,11))
+        elif '水' in tweeting_text: idl_photo = 'momoka{}.jpg'.format(nmr.randint(18,20))
+        else: idl_photo = 'momoka{}.jpg'.format(nmr.randint(1,37))
 
     elif idl_num == 10:
         import fumika_v3
