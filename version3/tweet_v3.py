@@ -87,11 +87,11 @@ for i in range(4):
         tweeting_text = mio.f_text
         if 'カマクラ' in tweeting_text:  idl_photo = 'mio33.jpg'
         elif '水着' in tweeting_text:   idl_photo = 'mio{}.jpg'.format(nmr.randint(24,27))
-        elif japan.month==1 and japan.day<=3:  idl_photo = 'mio0{}.jpg'.format(nmr.randint(28,31))
-        elif japan.month==9 and 3<=japan.day<=4:  idl_photo = 'mio0{}.jpg'.format(nmr.randint(29,31))
-        elif japan.month==11 and 28<=japan.day<=29:  idl_photo = 'mio0{}.jpg'.format(nmr.randint(29,31))
+        elif japan.month==1 and japan.day<=3:  idl_photo = 'mio{}.jpg'.format(nmr.randint(28,31))
+        elif japan.month==9 and 3<=japan.day<=4:  idl_photo = 'mio{}.jpg'.format(nmr.randint(29,31))
+        elif japan.month==11 and 28<=japan.day<=29:  idl_photo = 'mio{}.jpg'.format(nmr.randint(29,31))
         elif '雪' in tweeting_text or '真っ白' in tweeting_text:   idl_photo = 'mio{}.jpg'.format(nmr.randint(31,34))
-        else:  idl_photo = 'mio0{}.jpg'.format(nmr.randint(1,36))
+        else:  idl_photo = 'mio{}.jpg'.format(nmr.randint(1,36))
 
     elif idl_num == 3:
         import anzu_v3
@@ -253,8 +253,8 @@ for i in range(4):
         print ("テキストアップデート失敗: %s", req_text.text)
         exit()
 
-    print ("投稿できました！")
-
+    print(tweeting_text)
+    print()
     #連投防止のための一時停止
     time.sleep(10)
 
@@ -266,5 +266,5 @@ heroku run python version3/tweet_v3.py --app gentle-crag-58603
 
 runtime.txt
  pip freeze -l > requirements.txt
- とやる
+とやる
 """

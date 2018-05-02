@@ -3,6 +3,7 @@ from datetime import datetime as dt
 from urllib import request
 from bs4 import BeautifulSoup
 import datetime as dt
+import os
 
 class Recorder:
     def __init__(self,place,hidsuke):
@@ -13,7 +14,7 @@ class Recorder:
         self.date_array = []
         self.tenki_with_date = []
         self.tenki_dic = {}
-        self.filepath = "version3/tenki_record/{}の{}年の天気.xlsx".format(self.place,self.year)
+        self.filepath = "{}/tenki_record/{}の{}年の天気.xlsx".format(os.path.dirname(os.path.abspath(__file__)),self.place,self.year)
         self.sheetname = "{}月".format(self.month)
 
         prec_no_box = [34,44,62,82]
@@ -238,7 +239,6 @@ class Recorder:
 
 if __name__ == '__main__':
     now = dt.datetime.now()
-    day = [now.year,now.month,now.day,now.hour,now.minute]
     print("1998年からの去年までの天気予報を更新するのであれば1を")
     print("任意の年の天気予報を更新するのであれば2を")
     print("今月の天気予報を更新するのであれば3を")
@@ -246,22 +246,22 @@ if __name__ == '__main__':
     que = input("終了するならそれ以外のキーを押してください\n>> ")
     if que == "1":
         print("各地の天気予報の記録を更新します")
-        for year in range(1998,day[0]):
+        for year in range(1998,now.year):
             for month in range(1,13):
                 for place in ["仙台","東京","大阪","福岡"]:
-                    record = Recorder(place,[year,month,day[2]])
+                    record = Recorder(place,now)
                     record.get_info()
                     record.add_to_excel()
     if que == "2":
         year = input("情報を更新したい年を半角で入力してください\n>> ")
         for month in range(1,13):
             for place in ["仙台","東京","大阪","福岡"]:
-                record = Recorder(place,[int(year),month,day[2]])
+                record = Recorder(place,now)
                 record.get_info()
                 record.add_to_excel()
     if que == "3":
         for place in ["仙台","東京","大阪","福岡"]:
-            record = Recorder(place,day)
+            record = Recorder(place,now)
             record.get_info()
             record.add_to_excel()
     if que == "4":
@@ -269,17 +269,17 @@ if __name__ == '__main__':
         for year in range(1998,day[0]):
             for month in range(1,13):
                 for place in ["仙台","東京","大阪","福岡"]:
-                    record = Recorder(place,[year,month,day[2]])
+                    record = Recorder(place,[year,month,now.day])
                     record.eroor_check()
     if que == "5":
         for month in range(1,13):
             for place in ["仙台","東京","大阪","福岡"]:
-                record = Recorder(place,[2008,month,day[2]])
+                record = Recorder(place,[2008,month,now.day])
                 record.eroor_check()
     if que == "6":
         for month in range(1,day[1]+1):
             for place in ["仙台","東京","大阪","福岡"]:
-                record = Recorder(place,[day[0],month,day[2]])
+                record = Recorder(place,[now.year,month,now.day])
                 record.get_info()
                 record.add_to_excel()
     else: pass
