@@ -6,3 +6,4 @@ python-twitter==3.3
 requests==2.12.4
 requests-oauthlib==0.8.0
 twitter==1.18.0
+openpyxl==2.4.10

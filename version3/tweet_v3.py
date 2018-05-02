@@ -261,5 +261,10 @@ for i in range(4):
 
 """
 gentle-crag-58603　の　tweet03.py を動かす時
-heroku run python tweet03.py --app gentle-crag-58603
+cd を test2 で
+heroku run python version3/tweet_v3.py --app gentle-crag-58603
+
+runtime.txt
+ pip freeze -l > requirements.txt
+ とやる
 """
