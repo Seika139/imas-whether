@@ -13,7 +13,7 @@ class Recorder:
         self.date_array = []
         self.tenki_with_date = []
         self.tenki_dic = {}
-        self.filepath = "tenki_record/{}の{}年の天気.xlsx".format(self.place,self.year)
+        self.filepath = "version3/tenki_record/{}の{}年の天気.xlsx".format(self.place,self.year)
         self.sheetname = "{}月".format(self.month)
 
         prec_no_box = [34,44,62,82]
