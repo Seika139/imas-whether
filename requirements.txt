@@ -8,3 +8,4 @@ requests-oauthlib==0.8.0
 twitter==1.18.0
 openpyxl==2.4.10
 beautifulsoup4==4.6.0
+lxml==4.1.1
