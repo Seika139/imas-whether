@@ -13,25 +13,19 @@ import condition_setter as cs
 #実行する時間の取得
 import datetime as dt
 now = dt.datetime.now()
-"""
-下を0から9に直しておくこと
-"""
-japan = now + dt.timedelta(hours=0) #Herokuでは時間帯がUTCなので9時間後にずらす
+japan = now + dt.timedelta(hours=9) #Herokuでは時間帯がUTCなので9時間後にずらす
 j_hour = japan.hour
 if 0 <= j_hour <= 12: am_pm = 0
 else: am_pm = 1
-"""
+
 #Herokuの環境変数
 AT = os.environ["ACCESS_TOKEN"]           # Access Token
 AS = os.environ["ACCESS_TOKEN_SECRET"]    # Accesss Token Secert
 CK = os.environ["CONSUMER_KEY"]           # Consumer Key
 CS = os.environ["CONSUMER_SECRET"]        # Consumer Secret
-"""
+
 #予報するアイドルの番号の決定（被りが発生しないようにする）
-"""
-下の2番目の数字を変える
-"""
-l_idl_num = nmr.randint(0,11,4)
+l_idl_num = nmr.randint(0,13,4)
 while l_idl_num[0] == l_idl_num[1]:
     l_idl_num[1] = nmr.randint(7)
 while l_idl_num[2] in l_idl_num[:2]:
@@ -96,16 +90,17 @@ for i in range(4):
         elif japan.month==1 and japan.day<=3:  idl_photo = 'mio0{}.jpg'.format(nmr.randint(28,31))
         elif japan.month==9 and 3<=japan.day<=4:  idl_photo = 'mio0{}.jpg'.format(nmr.randint(29,31))
         elif japan.month==11 and 28<=japan.day<=29:  idl_photo = 'mio0{}.jpg'.format(nmr.randint(29,31))
-        elif '雪' in tweeting_text　or '真っ白' in tweeting_text:   idl_photo = 'mio{}.jpg'.format(nmr.randint(31,34))
+        elif '雪' in tweeting_text or '真っ白' in tweeting_text:   idl_photo = 'mio{}.jpg'.format(nmr.randint(31,34))
         else:  idl_photo = 'mio0{}.jpg'.format(nmr.randint(1,36))
 
     elif idl_num == 3:
         import anzu_v3
         anzu = anzu_v3.Anzu(am_pm,japan,gt.gt_box_array[am_pm],setter.cond_key,setter.s_data)
         tweeting_text = anzu.f_text
-        if japan.month==12 and 23<japan.day<26: idl_photo = 'anzu013.jpg'
-        elif　japan.month==2 and japan.day==14: idl_photo = 'anzu019.jpg'
-        elif　'麦わら帽子' in tweeting_text: idl_photo = 'anzu016.jpg'
+        if japan.month==12 and 23<japan.day<26: idl_photo = 'anzu01{}.jpg'.format(nmr.randint(1,4))
+        elif japan.month==2 and japan.day==14: idl_photo = 'anzu019.jpg'
+        elif japan.month==3 and japan.day==3: idl_photo = 'anzu032.jpg'
+        elif '麦わら帽子' in tweeting_text: idl_photo = 'anzu016.jpg'
         elif 'トロピカル' in tweeting_text or '海' in tweeting_text: idl_photo = 'anzu03.jpg'
         else: idl_photo = 'anzu0{}.jpg'.format(nmr.randint(1,40))
 
@@ -150,14 +145,16 @@ for i in range(4):
 
     elif idl_num == 8:
         import arisu_v3
-        arisu = arisu_v2.Arisu(am_pm,japan,gt.gt_box_array[am_pm],setter.cond_key,setter.s_data)
+        arisu = arisu_v3.Arisu(am_pm,japan,gt.gt_box_array[am_pm],setter.cond_key,setter.s_data)
         tweeting_text = arisu.f_text
-        if "イチゴ" or "いちご" in tweeting_text:
-            p_num = nmr.randint(1,6)
-            idl_photo = 'arisu_str{}.jpg'.format(p_num)
-        else:
-            p_num = nmr.randint(1,24)
-            idl_photo = 'arisu{}.jpg'.format(p_num)
+        if japan.month==2 and japan.day==14: idl_photo='arisu{}.jpg'.format(nmr.randint(1,3))
+        elif '奏' in tweeting_text: idl_photo = 'arisu17.jpg'
+        elif japan.month==12 and 23<japan.day<26: idl_photo='arisu{}.jpg'.format(nmr.randint(25,27))
+        elif '川の水' in tweeting_text: idl_photo = 'arisu22.jpg'
+        elif 'ラムネ' in tweeting_text or '出店' in tweeting_text: idl_photo = 'arisu21.jpg'
+        elif '牧場' in tweeting_text: idl_photo = 'arisu19.jpg'
+        elif japan.month==1 and 11<japan.day<16: idl_photo='arisu{}.jpg'.format(nmr.randint(27,31))
+        else: idl_photo = 'arisu{}.jpg'.format(nmr.randint(1,31))
 
     elif idl_num == 9:
         import momoka_v3
@@ -178,20 +175,51 @@ for i in range(4):
         import fumika_v3
         fumika = fumika_v3.Fumika(am_pm,japan,gt.gt_box_array[am_pm],setter.cond_key,setter.s_data)
         tweeting_text = fumika.f_text
-        if "ナイトプール" in tweeting_text:
-            idl_photo = 'fumika27.jpg'
-        else:
-            p_num = nmr.randint(1,29)
-            idl_photo = 'fumika{}.jpg'.format(p_num)
+        if 'ファッション雑誌' in tweeting_text: idl_photo='fumika4.jpg'
+        elif japan.month==2 and japan.day==14: idl_photo='fumika5.jpg'
+        elif '奏さん' in tweeting_text: idl_photo='fumika8.jpg'
+        elif '工芸茶' in tweeting_text: idl_photo='fumika11.jpg'
+        elif '海' in tweeting_text: idl_photo='fumika{}.jpg'.format(nmr.randint(27,29))
+        elif '美波さん' in tweeting_text: idl_photo='fumika26.jpg'
+        elif '人命救助' in tweeting_text: idl_photo='fumika{}.jpg'.format(nmr.randint(26,29))
+        elif 'イリュージョン' in tweeting_text: idl_photo='fumika25.jpg'
+        else: idl_photo = 'fumika{}.jpg'.format(nmr.randint(1,29))
 
     elif idl_num == 11:
         import sachiko_v3
         sachiko = sachiko_v3.Sachiko(am_pm,japan,gt.gt_box_array[am_pm],setter.cond_key,setter.s_data)
         tweeting_text = sachiko.f_text
-        if '水泳のテスト' or '泳げますよ' in tweeting_text: idl_photo = 'sachiko34.jpg'
+        if '水泳のテスト' in tweeting_text or '泳げますよ' in tweeting_text: idl_photo = 'sachiko26.jpg'
         elif '小テスト' in tweeting_text: idl_photo = 'sachiko13.jpg'
+        elif '犬ぞり' in tweeting_text: idl_photo = 'sachiko10.jpg'
+        elif 'オーロラ' in tweeting_text: idl_photo = 'sachiko11.jpg'
+        elif 'おみくじ' in tweeting_text: idl_photo = 'sachiko12.jpg'
+        elif japan.month==12 and 23<japan.day<26: idl_photo = 'sachiko{}.jpg'.format(nmr.randint(7,10))
+        elif '温泉' in tweeting_text: idl_photo = 'sachiko18.jpg'
         else: idl_photo = 'sachiko{}.jpg'.format(nmr.randint(1,35))
 
+    elif idl_num == 12:
+        import rika_v3
+        rika = rika_v3.Rika(am_pm,japan,gt.gt_box_array[am_pm],setter.cond_key,setter.s_data)
+        tweeting_text = rika.f_text
+        if 'バレンタイン' in tweeting_text: idl_photo = 'rika18.jpg'
+        elif japan.month==12 and 23<japan.day<26: idl_photo = 'rika6.jpg'
+        elif japan.month==2 and japan.day==14: idl_photo = 'rika18.jpg'
+        elif '雪だるま' in tweeting_text: idl_photo = 'rika28.jpg'
+        elif 'スケート' in tweeting_text: idl_photo = 'rika26.jpg'
+        elif "雪" in tweeting_text and 'キラキラ' in tweeting_text: idl_photo = 'rika27.jpg'
+        elif 'おせち' in tweeting_text: idl_photo = 'rika31.jpg'
+        elif '唯ちゃん' in tweeting_text: idl_photo = 'rika33.jpg'
+        elif '記念パーティー' in tweeting_text: idl_photo = 'rika32.jpg'
+        elif 'フルコンボ' in tweeting_text: idl_photo = 'rika5.jpg'
+        elif 'ゲーセン' in tweeting_text: idl_photo = 'rika{}.jpg'.format(nmr.randint(3,6))
+        elif 'シールでも' in tweeting_text: idl_photo = 'rika{}.jpg'.format(nmr.randint(3,5))
+        elif 'ひまわり' in tweeting_text: idl_photo = 'rika15.jpg'
+        elif '水着' in tweeting_text or '夏一番' in tweeting_text: idl_photo = 'rika{}.jpg'.format(nmr.randint(24,26))
+        elif 'やらしー' in tweeting_text: idl_photo = 'rika25.jpg'
+        elif '変装' in tweeting_text: idl_photo = 'rika7.jpg'
+        elif 'ビーチボール' in tweeting_text: idl_photo = 'rika24.jpg'
+        else: idl_photo = 'rika{}.jpg'.format(nmr.randint(1,38))
 
     #最終的な画像のパスを指定
     idl_photo = "pictures/" + idl_photo
@@ -229,6 +257,7 @@ for i in range(4):
 
     #連投防止のための一時停止
     time.sleep(10)
+
 
 """
 gentle-crag-58603　の　tweet03.py を動かす時

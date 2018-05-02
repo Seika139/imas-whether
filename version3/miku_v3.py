@@ -123,7 +123,7 @@ class Miku:
         self.d_text["snow_1-1"] = {
             'term':'am_pm','cases':2,'border':1,
             1 : "{}はさらに雪が積もりそうだにゃ。みんな、雪対策は大丈夫？".format(date),
-            0 : '今の積雪は{}cmだにゃ。{}はもっと積もるかも！'.format(s_data[3][0],date)
+            0 : '今の積雪は{}cmだにゃ。今日はもっと積もるかも！'.format(s_data[3][0])
             }
         #雪が降る＆積雪なし
         self.d_text["snow_1-0"] = '雪でいつもの街並みがガラッと模様替えにゃあ'

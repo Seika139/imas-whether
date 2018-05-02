@@ -12,6 +12,15 @@ class Udsuki:
         self.kion_min = int(prediction[4][1])
         self.rain = prediction[6]
 
+        if am_pm == 0:
+            date = "今日"
+            pre_date = "昨日"
+            ht = "#デレマス朝の天気予報"
+        else:
+            date = "明日"
+            pre_date = "今日"
+            ht = "#デレマス夜の天気予報"
+
         """ 1. 挨拶 """
 
         self.goodm_box = [
@@ -40,15 +49,6 @@ class Udsuki:
             else: self.aisatsu = cf.rand_sel(self.goode_box)
 
         """ 2. 予報 """
-
-        if am_pm == 0:
-            date = "今日"
-            pre_date = "昨日"
-            ht = "#デレマス朝の天気予報"
-        else:
-            date = "明日"
-            pre_date = "今日"
-            ht = "#デレマス夜の天気予報"
 
         self.tenki = "{}の{}の天気は「{}」、".format(date,self.place,self.weather)
         self.kion = "最高気温は{}度、最低気温は{}度の予報です。".format(self.kion_max,self.kion_min)
@@ -218,7 +218,7 @@ if __name__ == "__main__":
     print("文字数のチェックを実施します。")
     n = input("全てのテキストを見る場合は「1」と打ち込んでください\n>> ")
     box_list = [cin.goodm_box,cin.goode_box,cin.special,cin.tenki,cin.kion,cin.d_text]
-    cf.length_check(n,box_list)
+    cf.length_check(n,box_list,35,46)
     n2= input("ツイートと同じ文章を見るなら「2」と打ち込んでください\n>> ")
     if n2 =="2":
         print(cin.f_text)

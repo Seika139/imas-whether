@@ -49,7 +49,7 @@ class Fumika:
         if self.place == "仙台": self.d_text["nothing1"] = "続いては東京の天気です…"
         elif self.place == "東京": self.d_text["nothing1"] = "続いては大阪の天気です…"
         elif self.place == "大阪": self.d_text["nothing1"] = "続いては福岡の天気です…"
-        elif self.place == "福岡": self.d_text["nothing1"] = "天気予報…明日もチェックしてくださいね…".format(self.x_date)
+        elif self.place == "福岡": self.d_text["nothing1"] = "天気予報…{}もチェックしてくださいね…".format(self.x_date)
         if self.time == 0:
             self.d_text["nothing2"] = "春眠暁を覚えずとは言うものの、朝はいつでも眠いもので…"
             self.d_text["nothing3"] = "一日の計は朝にあり…と、早起きして良い一日を…"
@@ -62,7 +62,7 @@ class Fumika:
         self.d_text["snow2"] =  "蛍雪の功…？…いえ、私は読書が好きなだけで…"
         self.d_text["fine"] = "{}はいい天気になるようで…。たまには外に出て日差しを浴びるのも…".format(self.x_date)
         self.d_text["storm"] = "{}は荒れた天気の予報で…。晴耕雨読と言いますので、家で読書はいかがでしょうか…".format(self.x_date)
-        self.d_text["r_123"] = "…{}は１日を通して降水確率が{}％を越えるようです。その…、傘を忘れずにお出かけください…".format(self.x_date,min(self.rain[1],self.rain[2],self.rain[3]))
+        self.d_text["r_123"] = "…{}は１日を通して降水確率が{}％を越えるようです。その…、傘を忘れずにお出かけください…".format(self.x_date,min(self.rain[1:]))
         self.d_text["r_12"] = "…午前中の降水確率が{}％、午後は{}％です。その…、雨具が必要ですよ…".format(self.rain[1],self.rain[2])
         self.d_text["r_23"] = "…午後の降水確率が{}％、夜は{}％です。雨が降ってなくても傘を持っていってください…".format(self.rain[2],self.rain[3])
         self.d_text["r_3"] = "…{}は夜の降水確率が{}％です。その…遅くまで外出する人は傘をお持ちに…".format(self.x_date,self.rain[3])

@@ -1,184 +1,222 @@
-#encoding:utf-8
 import numpy.random as nmr
 import datetime as dt
+import common_function as cf
 
-"""
-setter　を使った。文章の作成
-"""
-class  Arisu:
-    def __init__(self,box,time):
+class Arisu:
+    def __init__(self,am_pm,japan,prediction,cond,s_data):
 
-        self.place = box[0]
-        self.reporting_date = box[1]
-        self.weather = box[2]
-        self.weather_id = box[3]
-        self.kion_box = box[4]
-        self.jikantai = box[5]
-        self.rain = box[6]
-        self.time = time
+        self.place = prediction[0]
+        self.weather = prediction[2]
+        self.weather_id = prediction[3]
+        self.kion_max = int(prediction[4][0])
+        self.kion_min = int(prediction[4][1])
+        self.rain = prediction[6]
 
-        if self.time == 0:
-            self.x_date = "今日"
-            self.ht = "#デレマス朝の天気予報"
+        if am_pm == 0:
+            date = "今日"
+            pre_date = "昨日"
+            ht = "#デレマス朝の天気予報"
+            greet = "おはようございます"
         else:
-            self.x_date = "明日"
-            self.ht = "#デレマス夜の天気予報"
+            date = "明日"
+            pre_date = "今日"
+            ht = "#デレマス夜の天気予報"
+            greet = "こんばんは"
 
-        #1/15は苺の日
-        self.xdt = dt.datetime.today()
-        self.sm = self.xdt.month
-        self.sd = self.xdt.day
-        self.strawberry = False
-        if self.sm == 1:
-            if self.sd >= 10 and self.sd <= 15: self.strawberry == True
+        """ 1. 挨拶 """
 
-        #挨拶の文章
-        def aisatsu(self):
-            if self.time == 0:
-                num = nmr.randint(2)
-                if num == 0: self.aisatsu = "みなさん、起きてますか？{}の{}の天気予報です。".format(self.x_date,self.place)
-                else: self.aisatsu = "おはようございます。橘ありすがお伝えする天気予報の時間です。"
-            else:
-                num = nmr.randint(2)
-                if num == 0: self.aisatsu = "お仕事お疲れ様です。私、橘ありすが{}の天気予報をお送りします。".format(self.place)
-                elif num == 1 : self.aisatsu = "こんばんは。橘ありすがお伝えする天気予報の時間です。"
-            return self.aisatsu
+        self.goodm_box = [
+            "{}時なりました。橘ありすの天気予報の時間です。".format(japan.hour%12),
+            "みなさん、起きてますか？橘ありすの天気予報の時間です。",
+            "おはようございます、今朝の天気予報は橘ありすがお送りします。"
+            ]
+        self.goode_box = [
+            "{}時なりました。橘ありすの天気予報の時間です。".format(japan.hour%12),
+            'こんばんは、今夜の天気予報は橘ありすがお送りします。',
+            'お仕事お疲れ様です。天気予報を見て明日に備えましょう。'
+            ]
+        self.special =[
+            '新年おめでとうございます。みなさん年賀状は書きましたか？',
+            'こんにちは…きょ、今日はバレンタインですね。私は平常運転ですよ…',
+            [cf.rand_sel(self.goodm_box),cf.rand_sel(self.goode_box)][am_pm],
+            'デレステ{}周年おめでとうございます。今後もよろしくお願いしますね'.format(japan.year-2015),
+            'ハロウィンの時期ですが、みなさんはハロウィンの由来はご存知ですか？',
+            'モバマス{}周年ですね。素敵な記念日にしましょう。'.format(japan.year-2011),
+            'メリークリスマス！デコレーションケーキで甘い聖夜を過ごしませんか？'
+            ]
 
-        self.aisatsu = aisatsu(self)
+        self.aisatsu = cf.special_day(japan,self.special)
+        if self.aisatsu == None:
+            if am_pm == 0: self.aisatsu = cf.rand_sel(self.goodm_box)
+            else: self.aisatsu = cf.rand_sel(self.goode_box)
 
+        """ 2. 予報 """
 
-        self.tenki = "{}の{}の天気は「{}」、".format(self.x_date,self.place,self.weather)
-        self.kion = "最高気温は{}度、最低気温は{}度の予報です。".format(self.kion_box[0],self.kion_box[1])
+        self.tenki = "{}の{}の天気は「{}」、".format(date,self.place,self.weather)
+        self.kion = "最高気温は{}度、最低気温は{}度の予報です。".format(self.kion_max,self.kion_min)
 
-        #最後の天気によっって変化する文章の辞書
+        """ 3. 締め　"""
+
         self.d_text = {}
-        self.d_text["nothing1"] = "美味しいだけでなく美しい、私が目指すのはイチゴのようなアイドル…"
-        if self.place == "仙台": self.d_text["nothing2"] = "続いて、東京の天気です。"
-        elif self.place == "東京": self.d_text["nothing2"] = "続いて、大阪の天気です。"
-        elif self.place == "大阪": self.d_text["nothing2"] = "続いて、福岡の天気です。"
-        elif self.place == "福岡": self.d_text["nothing2"] = "天気予報、欠かさずチェックしてくださいね。".format(self.x_date)
-        self.d_text["nothing3"] = "で、ですからありすではなく、橘と呼んでください！もう…"
-        self.d_text["nothing4"] = "クールタチバナ、見せられましたか？"
-        self.d_text["nothing5"] = "毎月22日はショートケーキの日です。なぜなら上にイチゴ(15)が乗ってますからね。"
-        self.d_text["snow1"] =  "ゆ、雪ですか…私は子供みたいにはしゃぎませんよ…"
-        self.d_text["snow2"] =  "雪…雪だるま…。な、何でもありません！"
-        self.d_text["fine"] = "{}はいい天気になるようですが、どこかのプロデューサーみたいに浮かれてちゃダメですよ！".format(self.x_date)
-        self.d_text["storm"] = "{}の天気は大荒れのようですが、レッスンならできます！".format(self.x_date)
-        self.d_text["r_123"] = "{}は１日を通して降水確率が{}％を越えそうです。傘を忘れずに出かけましょう。".format(self.x_date,min(self.rain[1],self.rain[2],self.rain[3]))
-        self.d_text["r_12"] = "午前中の降水確率が{}％、午後は{}％です。外出時には、傘を持って行ってください。".format(self.rain[1],self.rain[2])
-        self.d_text["r_23"] = "午後の降水確率が{}％、夜は{}％です。雨が降ってなくても傘を持っていくのがよいでしょう。".format(self.rain[2],self.rain[3])
-        self.d_text["r_3"] = "{}は夜の降水確率が{}％です。遅くまで外出する人は傘を持っていきましょう。".format(self.x_date,self.rain[3])
-        self.d_text["r_2"] = "{}は午後の降水確率が{}％です。出かける時は傘を持っていきましょう。".format(self.x_date,self.rain[2])
-        self.d_text["under10-1"] = "{}は冷え込むので、暖かい格好で出かけましょう。".format(self.x_date)
-        self.d_text["under10-2"] = "寒い季節はイチゴが美味しいですね。まあ、いつでも美味しいんですけど…"
-        self.d_text["under0-1"] = "{}は寒いから桃華さんに淹れ方を教わった紅茶を飲もうかな…".format(self.x_date)
-        self.d_text["under0-2"] = "寒いのは苦手ですけど、プロとしてお仕事はちゃんとこなしますよ！"
-        self.d_text["over30-1"] = "このぐらいの暑さでへばってるようじゃまだまだですね…"
-        self.d_text["over30-2"] = "{}は暑いです。バテないように気をつけてくださいね。".format(self.x_date)
-        self.d_text["kionsa"] = "{}は気温差の激しい１日になります。着脱が容易な服装で出かけましょう。".format(self.x_date)
-        self.d_text["strawberry1"] = "1月15日はいちごの日です。是非、いちごを食べてくださいね！"
-        self.d_text["strawberry2"] = "1月15日はいちごの日です。みなさん、いちごパスタはいかがですか？"
+        self.d_text["storm"] = "{}の天気は大荒れのようですが、レッスンならできます！".format(date)
+        self.d_text["fine"] = [
+            "{}はいい天気になるようですが、どこかのプロデューサーみたいに浮かれてちゃダメですよ！".format(date),
+            "{}はいい天気みたいです。桃華さんに教わった淹れ方で紅茶を飲んでみようかな…".format(date)
+            ]
+        self.d_text["rain_123"] = "{}は１日を通して降水確率が{}％を越えるようです。傘を忘れずに持っていきましょう。".format(date,min(self.rain[1:]))
+        self.d_text["rain_12"] = "午前中の降水確率が{}％、午後は{}％です。外出時は、傘を持って行ってください。".format(self.rain[1],self.rain[2])
+        self.d_text["rain_23"] = "午後の降水確率が{}％、夜は{}％です。雨が降ってなくても傘を持っていくのがいいでしょう。".format(self.rain[2],self.rain[3])
+        self.d_text["rain_3"] = "{}は夜の降水確率が{}％です。遅くまで外出する人は傘を持っていきましょう。".format(date,self.rain[3])
+        self.d_text["rain_2"] = "{}は午後の降水確率が{}％です。出かける時は傘が必要です。".format(date,self.rain[2])
+        self.d_text["kionsa"] = '{}は気温差の激しい１日になります。脱ぎ着がしやすい服装がいいですね。'.format(date)
+        self.d_text["under10"] = [
+            "{}は冷え込むので、暖かい格好で出かけましょう。".format(date),
+            "寒い季節はイチゴが美味しいですね。まあ、いつでも美味しいんですけど…"
+            ]
+        self.d_text["under0"] = [
+            "寒いのは苦手ですけど、プロとしてお仕事はちゃんとこなしますよ！",
+            "最近はホットコーヒーにチャレンジしてるんです。ブラックはまだ飲めませんが…"
+            ]
+        self.d_text['w_under0'] = [
+            "{}も冷え込みます。暖かい格好で出かけてください".format(date),
+            '寒い日が続きますね。たまには長風呂で体を芯から温めてはどうでしょう。'
+            ]
+        self.d_text["over30"] = [
+            "川の水がひんやりとして気持ちいい…水面に映る花火も綺麗ですね。",
+            'このぐらいの暑さでへばってるようじゃまだまだですよ…もぅ。'
+            ]
+        self.d_text["over25"] = [
+            "牧場でいただくアイスは絶品です。イチゴとミルクのアイス、皆さんも食べてみてください！",
+            "ラムネは夏の風物詩と言うそうですね…桃華さん、開け方分かりますか…？"
+            ]
+        self.d_text['w_over30'] = [
+            "屋外のステージは日焼け止めを塗る面積が大きくて…、別に手伝って欲しいわけではないです！",
+            "出店で買い食いするのは卒業しました。でも、たまにはいいかな…",
+            '暑い日が続きますね。うちのプロデューサーみたいにバテてるようじゃダメですよ！'
+            ]
+        self.d_text["w_cold_max"] = "{}は最高気温がここ一週間で最も低いです。寒さを考慮した服装にしましょう。".format(date)
+        self.d_text["w_cold_min"] = "{}はここ一週間で一番寒いですよ。薄着で風邪をひかないでくださいね".format(date)
+        self.d_text['w_hot_max'] = {
+            'term':'kion_max','cases':2,'border':25,
+            0 : "{}はこの一週間で一番暖かいです。普段より薄着がいいでしょう。".format(date),
+            1 :"{}はこの一週間で一番の暑さ、半袖でも過ごせるような日になりそうです。".format(date)
+            }
+        self.d_text["w_hot_min"] = "{}はここ一週間で最低気温が一番高いです。上着はいつもより薄いもので大丈夫ですよ".format(date)
+        self.d_text['y_hot_max'] = {
+            'term':'kion_max','cases':2,'border':25,
+            0 : "{}より{}度も暖かくなります。{}よりも薄着がいいでしょう。".format(pre_date,cf.rbs(self.kion_max-s_data[0][0]),pre_date),
+            1 : "{}より{}度も暑くなります。急な暑さに注意してくださいね。".format(pre_date,cf.rbs(self.kion_max-s_data[0][0]))
+            }
+        self.d_text["y_hot_min"] = "{}よりも最低気温が{}度も高くなります。{}よりも薄着がいいでしょう".format(pre_date,cf.rbs(self.kion_min-s_data[1][0]),pre_date)
+        self.d_text["y_cold_max"] = '{}よりも最高気温が{}度も低いので急な寒さに気をつけてください。'.format(pre_date,cf.rbs(self.kion_max-s_data[0][0]))
+        self.d_text["y_cold_min"] = '{}よりも最低気温が{}度も低いので厚着を心がけてください。'.format(pre_date,cf.rbs(self.kion_min-s_data[1][0]))
+        #雪が降る＆積雪が十分にある
+        self.d_text["snow_1-10"] = {
+            'term':'am_pm','cases':2,'border':1,
+            1 : '事務所のみんなは屋上で雪だるまを作ってます。わ、私は行きませんよ…',
+            0 : '現在の積雪は{}cmです。今日の雪でさらに積もる予想です。'.format(s_data[3][0])
+            }
+        #雪が降る＆まあまあの積雪
+        self.d_text["snow_1-1"] = {
+            'term':'am_pm','cases':2,'border':1,
+            1 : 'ちゃんと雪を落としてから中に入ってくださいよ、もう。',
+            0 : '現在の積雪は{}cmです。今日もさらに積もると思われます。'.format(s_data[3][0])
+            }
+        #雪が降る＆積雪なし
+        self.d_text["snow_1-0"] = 'ゆ、雪ですか…？私は子供みたいにはしゃぎませんよ…'
+        #雪が降らん＆積雪が十分にある
+        self.d_text["snow_0-10"] = {
+            'term':'am_pm','cases':2,'border':1,
+            0 : "現在の積雪は{}cmです。車で出かける人は気をつけてくださいね。".format(s_data[3][0]),
+            1 : '雪の結晶っていろんな形があるんですね！不思議な形ですよね。'
+            }
+        #雪が降らん＆少しの積雪
+        self.d_text["snow_0-1"] = [
+            "油断してると氷で足を滑らせますよ。私のプロデューサーみたいに…",
+            '解けた雪の水はどこに行くんですか？あとで調べてみます。'
+            ]
 
-        #何もない時の文章
-        def nothing(self):
-            num = nmr.randint(5)
-            if num == 0: self.c_text = self.d_text["nothing1"]
-            elif num == 1: self.c_text = self.d_text["nothing2"]
-            elif num == 2: self.c_text = self.d_text["nothing3"]
-            elif num == 3: self.c_text = self.d_text["nothing4"]
-            elif num == 4: self.c_text = self.d_text["nothing5"]
-            return self.c_text
-
-        #苺の日が近い場合
-        if self.strawberry == True:
-            num = nmr.randint(2)
-            if num == 0: self.c_text = self.d_text["strawberry1"]
-            elif num == 0: self.c_text = self.d_text["strawberry2"]
-
-        #雪が降る場合
-        elif "雪" in self.weather and "雨か雪" not in self.weather:
-            num = nmr.randint(2)
-            if num == 0: self.c_text = self.d_text["snow1"]
-            elif num == 1: self.c_text = self.d_text["snow2"]
-
-        #ただの「晴れ」の場合
-        elif "100" in self.weather_id:
-            self.c_text = self.d_text["fine"]
-        #強い雨が降る場合
-        elif "307" in self.weather_id or "308" in self.weather_id:
-            self.c_text = self.d_text["storm"]
-        #雷の恐れがある場合
-
-        #降水確率のチェック
-        elif "雨" in self.weather or min(self.rain) >= 10:
-            if min(self.rain[1],self.rain[2],self.rain[3]) >= 30:
-                self.c_text = self.d_text["r_123"]        #1日を通して降水確率が30%以上
-            elif min(self.rain[1],self.rain[2]) >= 30:
-                self.c_text = self.d_text["r_12"]      #午前と午後の降水確率が30%以上
-            elif min(self.rain[2],self.rain[3]) >= 30:
-                self.c_text = self.d_text["r_23"]     #午後と夜の降水確率が30%以上
-            elif self.rain[3] >= 30:
-                self.c_text = self.d_text["r_3"]      #夜の降水確率が30%以上
-            elif self.rain[2] >= 30:
-                self.c_text = self.d_text["r_2"]      #午後の降水確率が30%以上
-            else: self.c_text = nothing(self)      #それ以外
-
-        #気温の寒暖差が激しい場合
-        elif int(self.kion_box[0]) - int(self.kion_box[1]) >= 15:
-            self.c_text = self.d_text["kionsa"]
-
-        #ショートケーキの日
-        elif self.sd == 22 or self.sd == 15: self.c_text = self.d_text["nothing5"]
-
-        #最低気温が0度以下
-        elif int(self.kion_box[1]) <= 0:
-            num = nmr.randint(2)
-            if num == 0: self.c_text = self.d_text["under0-1"]
-            elif num == 1: self.c_text = self.d_text["under0-2"]
-
-        #最高気温が10度以下
-        elif int(self.kion_box[0]) <= 10:
-            num = nmr.randint(2)
-            if num == 0: self.c_text = self.d_text["under10-1"]
-            elif num == 1: self.c_text = self.d_text["under10-2"]
-
-        #気温が30度以上
-        elif int(self.kion_box[0]) >= 30:
-            num = nmr.randint(2)
-            if num == 0: self.c_text = self.d_text["over30-1"]
-            elif num == 1: self.c_text =  self.d_text["over30-2"]
-
-        #どの条件にも一致しなかった場合
-        else: self.c_text = nothing(self)
+        self.d_text['nothing_am']= [
+            'で、ですからありすではなく、橘と呼んでください！もう…',
+            '今回はクールタチバナ、見せられましたか？',
+            '遅刻するのはプロのすることじゃありませんよ。まだ朝ごはん食べてるんですか？'
+            ]
+        self.d_text['nothing_pm']=[
+            "おいしいだけでなく美しい、私が目指すのはイチゴのようなアイドル…",
+            "奏さんも文香さんとのランチ。なんだか大人になった気分…コーヒーだって飲めますよ…",
+            'twitterでのリサーチは任せてください。',
+            "毎月22日はショートケーキの日です。なぜなら上にイチゴ(15)が乗ってますからね。"
+            ]
+        self.d_text['special'] = [
+            '今年の目標は、もっと身長を伸ばすことですね…',
+            '仕事なのは分かってますけど…とてもドキドキしますね。',
+            'ひな祭りですか？わ、私は子供ではないので大丈夫です…',
+            '夜のパーティーは子供も参加していいんですよね？ねぇ？',
+            '私はハロウィンの由来知ってますよ。ちゃんと調べましたからね。',
+            'いつも支えてくださる皆さんには感謝です。私も気を引き締めて頑張ります。',
+            'サンタさんに、どんなプレゼントお願いしたかって…？ な、内緒です！'
+            ]
+        self.d_text['strawberry'] = [
+            "1月15日はいちごの日です。是非、いちごを食べてくださいね！",
+            "1月15日はいちごの日です。みなさん、いちごパスタはいかがですか？",
+            '15日のいちごの日に向けて、いちごパスタの試作会です。味見してくれますか？'
+            ]
 
 
-        #最終的な文章の合成
-        self.f_text = self.aisatsu+"\n"+self.tenki+self.kion+"\n"+self.c_text+"\n"+self.ht
-        print(self.f_text)
-        print(len(self.f_text),"words")
+        if cond[1] == 0:
+            self.c_text = cf.special_day(japan,self.d_text['special'])
+            if self.c_text == None:
+                if japan.month==1 and 12<=japan.day<=15: self.c_text = cf.rand_sel(self.d_text['strawberry'])
+                elif am_pm == 0: self.c_text = cf.rand_sel(self.d_text['nothing_am'])
+                else: self.c_text = cf.rand_sel(self.d_text['nothing_pm'])
+        elif cond[1]<=10 and japan.month==1 and 11<japan.day<16: self.c_text = cf.rand_sel(self.d_text['strawberry'])
+        elif type(self.d_text[cond[0]])==list: self.c_text = cf.rand_sel(self.d_text[cond[0]])
+        elif type(self.d_text[cond[0]])==dict:
+            x = self.d_text[cond[0]]
+            if x['term'] == 'kion_max': elemnt = self.kion_max
+            elif x['term'] == 'kion_min': elemnt = self.kion_min
+            elif x['term'] == 'am_pm': elemnt = am_pm
+            if elemnt >= x['border']: self.c_text = x[1]
+            else: self.c_text = x[0]
+        else: self.c_text = self.d_text[cond[0]]
 
+        self.f_text = self.aisatsu+'\n'+self.tenki+self.kion+'\n'+self.c_text+'\n'+ht
 
 if __name__ == "__main__":
-    import datetime as dt
-    xd = dt.datetime.today()
-    xh = xd.hour
-    if xh >= 0 and xh <= 12: x_num = 0
-    else: x_num = 1
 
-    import gt_v2
-    gt = gt_v2.Get_tenki("http://www.drk7.jp/weather/xml/13.xml",'東京地方',"東京")
-    cin = Arisu(gt.gt_box_array[x_num],x_num)
-    print("\n"+"#"*60)
-    print("このモジュールは橘ありすの「デレマス朝の天気予報」をお伝えします。")
+    import datetime as dt
+    now = dt.datetime.now()
+    japan = now + dt.timedelta(hours=0)
+    j_hour = japan.hour
+    if 0 <= j_hour <= 12: am_pm = 0
+    else: am_pm = 1
+
+    import recorder as rc
+    import gt_v3
+    gt = gt_v3.Get_tenki("http://www.drk7.jp/weather/xml/13.xml",'東京地方',"東京")
+    data_base = []
+    for j in range(7):
+        previous = japan - dt.timedelta(days=j+1-am_pm)
+        rcd = rc.Recorder("東京",previous)
+        rcd.get_info()
+        rcd.add_to_excel()
+        rcd.eroor_check()
+        data_base.append(rcd.get_data(previous))
+
+    if am_pm == 1:
+        data_base[0]["day"] = japan.day
+        data_base[0]["気温"]["最高"] = float(gt.gt_box_array[0][4][0])
+        data_base[0]["気温"]["最低"] = float(gt.gt_box_array[0][4][1])
+        data_base[0]["天気概況"]["昼"] = gt.gt_box_array[0][2]
+
+    import condition_setter as cs
+    setter = cs.Setter(am_pm,data_base,gt.gt_box_array[am_pm])
+    cin = Arisu(am_pm,japan,gt.gt_box_array[am_pm],setter.cond_key,setter.s_data)
+    print("このモジュールは橘ありすの天気予報をお伝えします。")
     print("文字数のチェックを実施します。")
-    print("="*60)
-    print(cin.aisatsu,":",len(cin.aisatsu),"words")
-    print(cin.tenki+cin.kion,":",len(cin.tenki+cin.kion),"words")
-    print("残り文字数",140-len(cin.aisatsu)-len(cin.tenki+cin.kion)-11,"words")
-    longest = ""
-    for i in cin.d_text:
-        if len(cin.d_text[i]) > len(longest): longest = cin.d_text[i]
-        print("-"*60)
-        print(i,":",cin.d_text[i],":",len(cin.d_text[i]),"words")
-    print("-"*60)
-    print("最長の文章は",":",longest,":",len(longest),"words")
+    n = input("全てのテキストを見る場合は「1」と打ち込んでください\n>> ")
+    box_list = [cin.goodm_box,cin.goode_box,cin.special,cin.tenki,cin.kion,cin.d_text]
+    cf.length_check(n,box_list)
+    n2= input("ツイートと同じ文章を見るなら「2」と打ち込んでください\n>> ")
+    if n2 =="2":
+        print(cin.f_text)
