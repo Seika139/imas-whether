@@ -64,7 +64,7 @@ class Miku:
         self.d_text["rain_12"] = "{}は午前中の降水確率が{}％、午後は{}％だって…傘を忘れずに持っていくにゃあ".format(date,self.rain[1],self.rain[2])
         self.d_text["rain_23"] = "午後の降水確率が{}％、夜は{}％だから、雨が降ってなくても、傘を持っていくにゃ！".format(self.rain[2],self.rain[3])
         self.d_text["rain_3"] = "{}は夜の降水確率が{}％。夕方から雨が降りそうだから傘を持って出かけるにゃあ。".format(date,self.rain[3])
-        self.d_text["rain_2"] = "{}は午後の降水確率が{}％だよ。出かけるときは傘を持っていくといくにゃあ".format(date,self.rain[2])
+        self.d_text["rain_2"] = "{}は午後の降水確率が{}％だよ。出かけるときは傘を持っていくにゃあ".format(date,self.rain[2])
         self.d_text["kionsa"] = "{}は気温差の激しい１日になるから服装に注意するにゃ！".format(date)
         self.d_text["under10"] = [
             "フゥー…寒いにゃあ。みくも毛皮があれば〜",
@@ -108,15 +108,15 @@ class Miku:
         self.d_text['y_hot_max'] = {
             'term':'kion_max','cases':2,'border':25,
             0 : "{}は{}よりも{}度暖かくなるから昨日より薄着にするといいにゃ".format(date,pre_date,cf.rbs(self.kion_max-s_data[0][0])),
-            1 : "{}は{}より{}度も暑いのにゃ。急な暑さに注意してにゃ".format(date,pre_date,cf.rbs(self.kion_max-s_data[0][0]))
+            1 : "{}は{}より{}度も暑いのにゃ。急な暑さに注意だにゃ！".format(date,pre_date,cf.rbs(self.kion_max-s_data[0][0]))
             }
         self.d_text["y_hot_min"] = "{}は{}よりも最低気温が{}度も高いって。{}より薄着にするにゃあ".format(date,pre_date,cf.rbs(self.kion_min-s_data[1][0]),pre_date)
-        self.d_text["y_cold_max"] = '{}は{}よりも最高気温が{}度も低いのにゃ。急に寒さに鳥肌、いや猫肌が立つにゃ〜'.format(date,pre_date,cf.rbs(self.kion_max-s_data[0][0]))
-        self.d_text["y_cold_min"] = '{}は{}よりも最低気温が{}度も低いのにゃ。急に寒さに鳥肌、いや猫肌が立つにゃ〜'.format(date,pre_date,cf.rbs(self.kion_min-s_data[1][0]))
+        self.d_text["y_cold_max"] = '{}は{}よりも最高気温が{}度も低いのにゃ。急な寒さで鳥肌、いや猫肌が立つにゃ〜'.format(date,pre_date,cf.rbs(self.kion_max-s_data[0][0]))
+        self.d_text["y_cold_min"] = '{}は{}よりも最低気温が{}度も低いのにゃ。急な寒さで鳥肌、いや猫肌が立つにゃ〜'.format(date,pre_date,cf.rbs(self.kion_min-s_data[1][0]))
         #雪が降る＆積雪が十分にある
         self.d_text["snow_1-10"] = {
             'term':'am_pm','cases':2,'border':1,
-            1 : "雪やこんこん♪雪の日、ネコチャンはこたつで丸くなるにゃ〜",
+            1 : "雪やこんこん♪雪の降る日、ネコチャンはこたつで丸くなるにゃ〜",
             0 : '今の積雪は{}cmだけど、今日も積もりそうだにゃあ'.format(s_data[3][0])
             }
         #雪が降る＆まあまあの積雪
@@ -171,7 +171,7 @@ class Miku:
             else: self.c_text = x[0]
         else: self.c_text = self.d_text[cond[0]]
 
-        self.f_text = self.aisatsu+'\n'+self.tenki+self.kion+'\n'+self.c_text+'\n'+ht
+        self.f_text = self.aisatsu+'\n'+self.tenki+self.kion+self.c_text+'\n'+ht
 
 if __name__ == "__main__":
 

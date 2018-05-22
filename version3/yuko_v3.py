@@ -173,7 +173,7 @@ class Yuko:
             else: self.c_text = x[0]
         else: self.c_text = self.d_text[cond[0]]
 
-        self.f_text = self.aisatsu+'\n'+self.tenki+self.kion+'\n'+self.c_text+'\n'+ht
+        self.f_text = self.aisatsu+'\n'+self.tenki+self.kion+self.c_text+'\n'+ht
 
 if __name__ == "__main__":
 

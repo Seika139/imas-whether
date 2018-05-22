@@ -28,12 +28,14 @@ class Arisu:
         self.goodm_box = [
             "{}時なりました。橘ありすの天気予報の時間です。".format(japan.hour%12),
             "みなさん、起きてますか？橘ありすの天気予報の時間です。",
-            "おはようございます、今朝の天気予報は橘ありすがお送りします。"
+            "おはようございます、今朝の天気予報は橘ありすがお送りします。",
+            'おはようございます。橘ありすのお送りする天気予報の時間です。'
             ]
         self.goode_box = [
             "{}時なりました。橘ありすの天気予報の時間です。".format(japan.hour%12),
             'こんばんは、今夜の天気予報は橘ありすがお送りします。',
-            'お仕事お疲れ様です。天気予報を見て明日に備えましょう。'
+            'お仕事お疲れ様です。天気予報を見て明日に備えましょう。',
+            'こんばんは。橘ありすのお送りする天気予報の時間です。'
             ]
         self.special =[
             '新年おめでとうございます。みなさん年賀状は書きましたか？',
@@ -180,7 +182,7 @@ class Arisu:
             else: self.c_text = x[0]
         else: self.c_text = self.d_text[cond[0]]
 
-        self.f_text = self.aisatsu+'\n'+self.tenki+self.kion+'\n'+self.c_text+'\n'+ht
+        self.f_text = self.aisatsu+'\n'+self.tenki+self.kion+self.c_text+'\n'+ht
 
 if __name__ == "__main__":
 

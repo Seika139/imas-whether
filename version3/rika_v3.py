@@ -27,11 +27,13 @@ class Rika:
 
         self.goodm_box = [
             'やっほー☆城ヶ崎莉嘉だよー。アタシの天気予報、見て見て！',
-            'みんなおはー☆天気予報を見て、今日も一日ファイトだー！'
+            'みんな,おはー☆天気予報を見て、今日も一日ファイトだー！',
+            'なんと、今日のリポーターはカリスマJCの莉嘉ちゃんでーす☆えへっ☆'
             ]
         self.goode_box = [
             "やっほー☆城ヶ崎莉嘉だよー。アタシの天気予報、見て見て！",
-            'こんばんはー☆JC天気予報士のリカが明日の天気を教えちゃうよ！'
+            'こんばんはー☆JC天気予報士のリカが明日の天気を教えちゃうよ！',
+            'みんな〜お仕事お疲れ様ー☆アタシの天気予報見て元気だしてよねっ！'
             ]
         self.special =[
             'ハッピーニューイヤー！最高の新年にしようねっ☆',
@@ -175,7 +177,7 @@ class Rika:
             self.c_text = x[1] if element >= x['border'] else x[0]
         else: self.c_text = self.d_text[cond[0]]
 
-        self.f_text = self.aisatsu+'\n'+self.tenki+self.kion+'\n'+self.c_text+'\n'+ht
+        self.f_text = self.aisatsu+'\n'+self.tenki+self.kion+self.c_text+'\n'+ht
 
 if __name__ == "__main__":
 
