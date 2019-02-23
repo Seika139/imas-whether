@@ -53,7 +53,7 @@ class Yoshino:
         """ 2. 予報 """
 
         self.tenki = "{}の{}の天気は「{}」、".format(date,self.place,self.weather)
-        self.kion = "最高気温は{}度、最低気温は{}度となるでしょー".format(self.kion_max,self.kion_min)
+        self.kion = "最高気温は{}度、最低気温は{}度となるでしょー。".format(self.kion_max,self.kion_min)
 
         """ 3. 締め　"""
 
